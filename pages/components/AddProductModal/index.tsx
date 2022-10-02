@@ -1,6 +1,7 @@
 import styles from './styles.module.css';
 import { useDialogState, Dialog, DialogDisclosure } from "reakit/Dialog";
 import { AiOutlineClose } from 'react-icons/ai';
+import { BsFillPlusCircleFill } from 'react-icons/bs';
 import Input from '../Input';
 import { useState, useEffect, useMemo } from 'react';
 import { Product } from '../..';
@@ -53,7 +54,13 @@ export default function AddProductModal({
 
   return (
     <>
-      <DialogDisclosure {...modal}>Adicionar um Produdo +</DialogDisclosure>
+      <DialogDisclosure
+        className={styles.addProductModalOpenModalButton}
+        {...modal}
+      >
+        <span className={styles.addProductModalButtonText}>Adicionar um Produdo</span>
+        <BsFillPlusCircleFill size="20" />
+      </DialogDisclosure>
       {modal.visible && (
         <Dialog aria-label="Adicione um Produto" {...modal} className={styles.addProductModalContainer}>
           <div className={styles.addProductModalHeadline}>
