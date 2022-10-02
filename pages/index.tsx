@@ -16,6 +16,7 @@ export interface Product {
 const Home: NextPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProduct, setFilteredProduct] = useState<Product[]>();
+  const [renderBackToListButton, setRenderBackToListButton] = useState(false);
 
   const handleProducts = (product: Product) => {
     if (products?.find((p) => p?.productName === product?.productName)) {
@@ -37,9 +38,15 @@ const Home: NextPage = () => {
   };
 
   const handleFilteredProduct = (term: string) => {
+    if (term === ``) {
+      setRenderBackToListButton(false);
+      return setFilteredProduct(products);
+    }
+
     const product = products?.filter((product) => product
       ?.productName?.toLowerCase()?.includes(term?.toLowerCase()));
 
+    setRenderBackToListButton(true);
     return setFilteredProduct(product);
   };
 
@@ -58,8 +65,7 @@ const Home: NextPage = () => {
         <AddProductModal handleProducts={handleProducts} />
         <hr className={styles.divider}/>
         <div className={styles.homePageWrapper}>
-          {filteredProduct &&
-            filteredProduct.length > 0 && (
+          {renderBackToListButton && (
               <BackToTheListProductsButton setFilteredProduct={setFilteredProduct} /> 
             )
           }
