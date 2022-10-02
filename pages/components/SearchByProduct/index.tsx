@@ -13,7 +13,8 @@ export default function SearchByProduct({
 
   const handleSearchedProduct = () => {
     if (searchedProduct.length > 0) {
-      return handleFilteredProduct(searchedProduct);
+      handleFilteredProduct(searchedProduct);
+      setSearchedProduct(``);
     }
   };
 
