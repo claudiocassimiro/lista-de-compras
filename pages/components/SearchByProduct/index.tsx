@@ -1,9 +1,21 @@
 import { useState } from 'react';
 import Input from '../Input';
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 
-export default function SearchByProduct() {
-  const [searchedProduct, setSearchedProduct] = useState(``)
+export interface SearchByProductProps {
+  handleFilteredProduct: (term: string) => void;
+}
+
+export default function SearchByProduct({
+  handleFilteredProduct,
+}: SearchByProductProps) {
+  const [searchedProduct, setSearchedProduct] = useState(``);
+
+  const handleSearchedProduct = () => {
+    if (searchedProduct.length > 0) {
+      return handleFilteredProduct(searchedProduct);
+    }
+  };
 
   return (
     <div className={styles.searchByProductContainer}>
@@ -14,7 +26,13 @@ export default function SearchByProduct() {
         placeholder="Pesquise um produto na lista"
         onChange={setSearchedProduct}
       />
-      <button type="button" className={styles.searchByProductButton}>Buscar</button>
+      <button
+        type="button"
+        className={styles.searchByProductButton}
+        onClick={handleSearchedProduct}
+      >
+        Buscar
+      </button>
     </div>
   );
 }
