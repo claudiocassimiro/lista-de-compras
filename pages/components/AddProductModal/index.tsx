@@ -40,8 +40,8 @@ export default function AddProductModal({
     if (allInputIsNotEmpty) {
       const product = {
         productName,
-        productPrice,
         productQuantity,
+        productPrice: `${Number(productPrice) * Number(productQuantity)}`,
       };
 
       handleProducts(product);
@@ -71,6 +71,7 @@ export default function AddProductModal({
           <div className={styles.addProductModalContainerContent}>
             <div className={styles.addProductModalContainerInputs}>
                 <Input
+                  className={styles.addProductModalInput}
                   type="text"
                   name="productName"
                   value={productName}
@@ -78,6 +79,7 @@ export default function AddProductModal({
                   onChange={setProductName}
                 />
                 <Input
+                  className={styles.addProductModalInput}
                   name="productPrice"
                   value={productPrice}
                   type="number" 
@@ -85,6 +87,7 @@ export default function AddProductModal({
                   onChange={setProductPrice}
                 />
                 <Input
+                  className={styles.addProductModalInput}
                   name="productQuantity"
                   value={productQuantity}
                   type="number" 
