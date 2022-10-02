@@ -1,0 +1,28 @@
+.backToTheListProductsContainer {
+  background-color: #ababab;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  width: 100%;
+  bottom: 0;
+}
+
+.backToTheListProductsBackButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.backToTheListProductsText {
+  margin-left: 1.2rem;
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  letter-spacing: -0.03rem;
+}
