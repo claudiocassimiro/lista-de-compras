@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Input from '../Input';
 import styles from './styles.module.css';
 
@@ -11,12 +11,9 @@ export default function SearchByProduct({
 }: SearchByProductProps) {
   const [searchedProduct, setSearchedProduct] = useState(``);
 
-  const handleSearchedProduct = () => {
-    if (searchedProduct.length > 0) {
-      handleFilteredProduct(searchedProduct);
-      setSearchedProduct(``);
-    }
-  };
+  useEffect(() => {
+    handleFilteredProduct(searchedProduct);
+  }, [searchedProduct]);
 
   return (
     <div className={styles.searchByProductContainer}>
@@ -27,13 +24,6 @@ export default function SearchByProduct({
         placeholder="Pesquise um produto na lista"
         onChange={setSearchedProduct}
       />
-      <button
-        type="button"
-        className={styles.searchByProductButton}
-        onClick={handleSearchedProduct}
-      >
-        Buscar
-      </button>
     </div>
   );
 }
