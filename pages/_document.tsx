@@ -7,7 +7,7 @@ class MyDocument extends Document {
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
           <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" href="/icon-192x192.png" />
+          <link rel="apple-touch-icon" href="/icon-256x256.png" />
           <meta name="theme-color" content="#fff" />
         </Head>
         <body>
