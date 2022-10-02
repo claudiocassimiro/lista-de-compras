@@ -1,3 +1,26 @@
+.addProductModalOpenModalButton,
+.addProductModalButton {
+  font-size: 1.4rem;
+  font-weight: 600;
+  width: 100%;
+  height: 4rem;
+  border-radius: 0.4rem;
+  outline: none;
+  border: 0.1rem solid #7c7c7c;
+}
+
+.addProductModalOpenModalButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  margin-top: 0.8rem;
+}
+
+.addProductModalButtonText {
+  margin-right: 0.8rem;
+}
+
 .addProductModalContainer {
   width: 100vw;
   height: 100vh;
@@ -39,14 +62,4 @@
   row-gap: 1.3rem;
   width: 100%;
   height: 15rem;
-}
-
-.addProductModalButton {
-  font-size: 1.4rem;
-  font-weight: 600;
-  width: 100%;
-  height: 4rem;
-  border-radius: 0.4rem;
-  outline: none;
-  border: 0.1rem solid #7c7c7c;
 }
