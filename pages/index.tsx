@@ -2,7 +2,9 @@ import type { NextPage } from 'next'
 import { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import AddProductModal from './components/AddProductModal'
+import BackToTheListProductsButton from './components/BackToTheListProductsButton'
 import Header from './components/Header'
+import RenderProducts from './components/RenderProducts'
 import SearchByProduct from './components/SearchByProduct'
 
 export interface Product {
@@ -21,12 +23,12 @@ const Home: NextPage = () => {
         return p.productName === product.productName
           ? {
             productName: p.productName,
-            productPrice: p.productPrice,
-            productQuantity: `${Number(p.productQuantity) + Number(product.productQuantity)}`
+            productQuantity: `${Number(p.productQuantity) + Number(product.productQuantity)}`,
+            productPrice: `${Number(p.productPrice) * Number(p.productQuantity)}`,
           } : {
             productName: p.productName,
-            productPrice: p.productPrice,
-            productQuantity: p.productQuantity
+            productQuantity: p.productQuantity,
+            productPrice: `${Number(p.productPrice) * Number(p.productQuantity)}`,
           }
       }));
     }
@@ -35,10 +37,18 @@ const Home: NextPage = () => {
   };
 
   const handleFilteredProduct = (term: string) => {
-    const product = products?.filter((product) => product?.productName?.includes(term));
+    const product = products?.filter((product) => product
+      ?.productName?.toLowerCase()?.includes(term?.toLowerCase()));
 
     return setFilteredProduct(product);
   };
+
+  const handleRemoveProduct = (index: number) => {
+    const newProducts = products?.filter((_product, i) => i !== index);
+
+    setProducts(newProducts);
+    setFilteredProduct(newProducts?.filter((product) => product.productName !== newProducts[index]?.productName));
+  }
 
   return (
     <div className={styles.container}>
@@ -47,6 +57,14 @@ const Home: NextPage = () => {
         <SearchByProduct handleFilteredProduct={handleFilteredProduct} />
         <AddProductModal handleProducts={handleProducts} />
         <hr className={styles.divider}/>
+        <div className={styles.homePageWrapper}>
+          {filteredProduct &&
+            filteredProduct.length > 0 && (
+              <BackToTheListProductsButton setFilteredProduct={setFilteredProduct} /> 
+            )
+          }
+          <RenderProducts products={products} filteredProduct={filteredProduct || []} handleRemoveProduct={handleRemoveProduct} />
+        </div>
       </div>
     </div>
   )
