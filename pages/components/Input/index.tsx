@@ -1,4 +1,5 @@
 import styles from './styles.module.css';
+import cn from 'classnames';
 
 export interface InputProps {
   type: string;
@@ -6,6 +7,7 @@ export interface InputProps {
   name: string;
   value: string;
   onChange: (value: string) => void;
+  className?: string;
 }
 
 export default function Input({
@@ -13,11 +15,12 @@ export default function Input({
   placeholder,
   name,
   value,
-  onChange
+  onChange,
+  className,
 }: InputProps) {
   return (
     <input
-      className={styles.input}
+      className={cn(styles.input, className)}
       type={type}
       placeholder={placeholder}
       name={name}
