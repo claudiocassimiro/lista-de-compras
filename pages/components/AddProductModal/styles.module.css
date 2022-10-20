@@ -66,3 +66,11 @@
 .addProductModalInput {
   margin-bottom: 1.3rem;
 }
+
+.label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.4rem;
+  margin-bottom: 1.3rem;
+}
