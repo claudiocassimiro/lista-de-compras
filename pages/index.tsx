@@ -82,6 +82,7 @@ const Home: NextPage = () => {
         <div className={styles.homePageWrapper}>
           {renderBackToListButton && (
             <BackToTheListProductsButton
+              filteredProduct={filteredProduct}
               setFilteredProduct={setFilteredProduct}
             />
           )}
