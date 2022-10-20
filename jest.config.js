@@ -1,9 +1,12 @@
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
-module.exports = {
-    preset: "ts-jest",
-    testEnvironment: "node",
-    roots: ["<rootDir>"],
-    // the following line is needed in order to grab modules from the
-    // src folder without the need to write them relatively
-    moduleDirectories: ["node_modules"],
-  };
+const nextJest = require("next/jest");
+const createJestConfig = nextJest({
+  dir: "./",
+});
+const customJestConfig = {
+  moduleDirectories: ["node_modules", "<rootDir>/"],
+  testEnvironment: "jest-environment-jsdom",
+  setupFilesAfterEnv: [
+    "@testing-library/jest-dom/extend-expect"
+  ]
+};
+module.exports = createJestConfig(customJestConfig);
