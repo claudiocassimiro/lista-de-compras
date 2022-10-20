@@ -1,8 +1,8 @@
-// {
-//   "presets": ["next/babel"],
-//   "env": {
-//     "test": {
-//       "presets": ["next/babel"]
-//     }
-//   }
-// }
+{
+  "presets": ["next/babel"],
+  "env": {
+    "test": {
+      "presets": ["next/babel"]
+    }
+  }
+}
