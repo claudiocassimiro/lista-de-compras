@@ -21,37 +21,41 @@ describe(`Test render Input`, () => {
 
   describe(`when the component is called and the prop type`, () => {
     test(`is different to "checkbox", should return an input element with testId equal to "inputs-different-than-checkbox"`, () => {
-        render(<Input {...mockProps} />);
+      render(<Input {...mockProps} />);
 
-        expect(screen.getByTestId(`inputs-different-than-checkbox`)).toBeInTheDocument();
+      expect(
+        screen.getByTestId(`inputs-different-than-checkbox`),
+      ).toBeInTheDocument();
     });
 
     test(`is different to "checkbox", shouldn't return an input element with testId equal to "input-checkbox"`, () => {
-        render(<Input {...mockProps} />);
+      render(<Input {...mockProps} />);
 
-        expect(screen.queryByTestId(`input-checkbox`)).not.toBeInTheDocument();
+      expect(screen.queryByTestId(`input-checkbox`)).not.toBeInTheDocument();
     });
 
     test(`is equal to "checkbox", should return an input element with testId equal to "input-checkbox"`, () => {
-        const modifiedMockProps = {
-          ...mockProps,
-          type: 'checkbox',
-        };
-        
-        render(<Input {...modifiedMockProps} />);
+      const modifiedMockProps = {
+        ...mockProps,
+        type: 'checkbox',
+      };
 
-        expect(screen.getByTestId(`input-checkbox`)).toBeInTheDocument();
+      render(<Input {...modifiedMockProps} />);
+
+      expect(screen.getByTestId(`input-checkbox`)).toBeInTheDocument();
     });
 
     test(`is equal to "checkbox", shouldn't return an input element with testId equal to "inputs-different-than-checkbox"`, () => {
-        const modifiedMockProps = {
-          ...mockProps,
-          type: 'checkbox',
-        };
-        
-        render(<Input {...modifiedMockProps} />);
+      const modifiedMockProps = {
+        ...mockProps,
+        type: 'checkbox',
+      };
 
-        expect(screen.queryByTestId(`inputs-different-than-checkbox`)).not.toBeInTheDocument();
+      render(<Input {...modifiedMockProps} />);
+
+      expect(
+        screen.queryByTestId(`inputs-different-than-checkbox`),
+      ).not.toBeInTheDocument();
     });
   });
 });

@@ -11,9 +11,14 @@ export default function BackToTheListProductsButton({
 }: BackToTheListProductsButtonProps) {
   return (
     <div className={styles.backToTheListProductsContainer}>
-      <button className={styles.backToTheListProductsBackButton} onClick={() => setFilteredProduct([])}>
+      <button
+        className={styles.backToTheListProductsBackButton}
+        onClick={() => setFilteredProduct([])}
+      >
         <TbArrowBack size="20" />
-        <span className={styles.backToTheListProductsText}>Voltar para lista</span>
+        <span className={styles.backToTheListProductsText}>
+          Voltar para lista
+        </span>
       </button>
     </div>
   );

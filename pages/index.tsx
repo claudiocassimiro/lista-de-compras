@@ -1,11 +1,11 @@
-import type { NextPage } from 'next'
-import { useState } from 'react'
-import styles from '../styles/Home.module.css'
-import AddProductModal from './components/AddProductModal'
-import BackToTheListProductsButton from './components/BackToTheListProductsButton'
-import Header from './components/Header'
-import RenderProducts from './components/RenderProducts'
-import SearchByProduct from './components/SearchByProduct'
+import type { NextPage } from 'next';
+import { useState } from 'react';
+import styles from '../styles/Home.module.css';
+import AddProductModal from './components/AddProductModal';
+import BackToTheListProductsButton from './components/BackToTheListProductsButton';
+import Header from './components/Header';
+import RenderProducts from './components/RenderProducts';
+import SearchByProduct from './components/SearchByProduct';
 
 export interface Product {
   productName: string;
@@ -21,18 +21,27 @@ const Home: NextPage = () => {
 
   const handleProducts = (product: Product) => {
     if (products?.find((p) => p?.productName === product?.productName)) {
-      return setProducts(products.map((p) => {
-        return p.productName === product.productName
-          ? {
-            productName: p.productName,
-            productQuantity: `${Number(p.productQuantity) + Number(product.productQuantity)}`,
-            productPrice: `${Number(p.productPrice) * Number(p.productQuantity)}`,
-          } : {
-            productName: p.productName,
-            productQuantity: p.productQuantity,
-            productPrice: `${Number(p.productPrice) * Number(p.productQuantity)}`,
-          }
-      }));
+      return setProducts(
+        products.map((p) => {
+          return p.productName === product.productName
+            ? {
+                productName: p.productName,
+                productQuantity: `${
+                  Number(p.productQuantity) + Number(product.productQuantity)
+                }`,
+                productPrice: `${
+                  Number(p.productPrice) * Number(p.productQuantity)
+                }`,
+              }
+            : {
+                productName: p.productName,
+                productQuantity: p.productQuantity,
+                productPrice: `${
+                  Number(p.productPrice) * Number(p.productQuantity)
+                }`,
+              };
+        }),
+      );
     }
 
     setProducts([...products, product]);
@@ -44,8 +53,9 @@ const Home: NextPage = () => {
       return setFilteredProduct(products);
     }
 
-    const product = products?.filter((product) => product
-      ?.productName?.toLowerCase()?.includes(term?.toLowerCase()));
+    const product = products?.filter((product) =>
+      product?.productName?.toLowerCase()?.includes(term?.toLowerCase()),
+    );
 
     setRenderBackToListButton(true);
     return setFilteredProduct(product);
@@ -55,8 +65,12 @@ const Home: NextPage = () => {
     const newProducts = products?.filter((_product, i) => i !== index);
 
     setProducts(newProducts);
-    setFilteredProduct(newProducts?.filter((product) => product.productName !== newProducts[index]?.productName));
-  }
+    setFilteredProduct(
+      newProducts?.filter(
+        (product) => product.productName !== newProducts[index]?.productName,
+      ),
+    );
+  };
 
   return (
     <div className={styles.container}>
@@ -64,17 +78,22 @@ const Home: NextPage = () => {
       <div className={styles.homePageContent}>
         <SearchByProduct handleFilteredProduct={handleFilteredProduct} />
         <AddProductModal handleProducts={handleProducts} />
-        <hr className={styles.divider}/>
+        <hr className={styles.divider} />
         <div className={styles.homePageWrapper}>
           {renderBackToListButton && (
-              <BackToTheListProductsButton setFilteredProduct={setFilteredProduct} /> 
-            )
-          }
-          <RenderProducts products={products} filteredProduct={filteredProduct || []} handleRemoveProduct={handleRemoveProduct} />
+            <BackToTheListProductsButton
+              setFilteredProduct={setFilteredProduct}
+            />
+          )}
+          <RenderProducts
+            products={products}
+            filteredProduct={filteredProduct || []}
+            handleRemoveProduct={handleRemoveProduct}
+          />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
