@@ -43,7 +43,7 @@ jobs:
           fi
           npm run build
       - name: Release to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: actions/setup-node@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
