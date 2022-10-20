@@ -4,12 +4,14 @@ import styles from './styles.module.css';
 
 export interface BackToTheListProductsButtonProps {
   setFilteredProduct: (product: Product[]) => void;
+  filteredProduct: Product[] | undefined;
 }
 
 export default function BackToTheListProductsButton({
   setFilteredProduct,
+  filteredProduct,
 }: BackToTheListProductsButtonProps) {
-  return (
+  return filteredProduct && filteredProduct.length > 0 ? (
     <div className={styles.backToTheListProductsContainer}>
       <button
         className={styles.backToTheListProductsBackButton}
@@ -21,5 +23,5 @@ export default function BackToTheListProductsButton({
         </span>
       </button>
     </div>
-  );
+  ): null;
 }
