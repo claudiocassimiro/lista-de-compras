@@ -9,7 +9,8 @@
     "lint": "eslint ./ --ext js,jsx,ts,tsx",
     "test": "jest --watch",
     "format": "prettier --ignore-path .gitignore \"**/*.+(ts|js|tsx)\" --write",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@testing-library/react": "13.4.0",
@@ -36,7 +37,7 @@
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
     "eslint-plugin-react": "7.31.8",
-    "husky": "8.0.1",
+    "husky": "^8.0.0",
     "jest-environment-jsdom": "29.2.1",
     "pre-commit": "1.2.2",
     "ts-jest": "29.0.3",
