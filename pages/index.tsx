@@ -10,6 +10,7 @@ import SearchByProduct from './components/SearchByProduct'
 export interface Product {
   productName: string;
   productPrice: string;
+  thisProductIsSellByWeight?: boolean;
   productQuantity: string;
 }
 
