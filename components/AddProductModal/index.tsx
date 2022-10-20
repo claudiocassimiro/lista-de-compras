@@ -88,7 +88,7 @@ export default function AddProductModal({
         {...modal}
       >
         <span className={styles.addProductModalButtonText}>
-          Adicionar um Produdo
+          Adicionar um Produto
         </span>
         <BsFillPlusCircleFill size="20" />
       </DialogDisclosure>
