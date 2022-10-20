@@ -1,11 +1,11 @@
-import { Product } from '../..';
-import styles from './styles.module.css';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { Product } from '../../pages'
+import styles from './styles.module.css'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 export interface RenderProductsProps {
-  products: Product[];
-  filteredProduct: Product[];
-  handleRemoveProduct: (index: number) => void;
+  products: Product[]
+  filteredProduct: Product[]
+  handleRemoveProduct: (index: number) => void
 }
 
 export default function RenderProducts({
@@ -36,7 +36,7 @@ export default function RenderProducts({
                   onClick={() => handleRemoveProduct(index)}
                 />
               </div>
-            );
+            )
           })
         : products?.map((product, index) => {
             return (
@@ -58,8 +58,8 @@ export default function RenderProducts({
                   onClick={() => handleRemoveProduct(index)}
                 />
               </div>
-            );
+            )
           })}
     </div>
-  ) : null; // TODO: render empty page
+  ) : null // TODO: render empty page
 }
