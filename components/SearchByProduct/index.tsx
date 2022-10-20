@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react'
-import Input from '../Input'
-import styles from './styles.module.css'
+import { useEffect, useState } from 'react';
+import Input from '../Input';
+import styles from './styles.module.css';
 
 export interface SearchByProductProps {
-  handleFilteredProduct: (term: string) => void
+  handleFilteredProduct: (term: string) => void;
 }
 
 export default function SearchByProduct({
   handleFilteredProduct,
 }: SearchByProductProps) {
-  const [searchedProduct, setSearchedProduct] = useState(``)
+  const [searchedProduct, setSearchedProduct] = useState(``);
 
   useEffect(() => {
-    handleFilteredProduct(searchedProduct)
-  }, [searchedProduct])
+    handleFilteredProduct(searchedProduct);
+  }, [handleFilteredProduct, searchedProduct]);
 
   return (
     <div className={styles.searchByProductContainer}>
@@ -25,5 +25,5 @@ export default function SearchByProduct({
         onChange={setSearchedProduct}
       />
     </div>
-  )
+  );
 }

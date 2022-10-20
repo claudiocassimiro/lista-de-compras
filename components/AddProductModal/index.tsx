@@ -1,25 +1,25 @@
-import styles from './styles.module.css'
-import { useDialogState, Dialog, DialogDisclosure } from 'reakit/Dialog'
-import { AiOutlineClose } from 'react-icons/ai'
-import { BsFillPlusCircleFill } from 'react-icons/bs'
-import Input from '../Input'
-import { useState, useEffect, useMemo } from 'react'
-import { Product } from '../../pages'
+import styles from './styles.module.css';
+import { useDialogState, Dialog, DialogDisclosure } from 'reakit/Dialog';
+import { AiOutlineClose } from 'react-icons/ai';
+import { BsFillPlusCircleFill } from 'react-icons/bs';
+import Input from '../Input';
+import { useState, useEffect, useMemo } from 'react';
+import { Product } from '../../pages';
 
 export interface AddProductModalProps {
-  handleProducts: (product: Product) => void
+  handleProducts: (product: Product) => void;
 }
 
 export default function AddProductModal({
   handleProducts,
 }: AddProductModalProps) {
-  const modal = useDialogState()
-  const [buttonDisabled, setButtonDisabled] = useState<boolean>()
-  const [productName, setProductName] = useState(``)
+  const modal = useDialogState();
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>();
+  const [productName, setProductName] = useState(``);
   const [thisProductIsSellByWeight, setThisProductIsSellByWeight] =
-    useState(false)
-  const [productPrice, setProductPrice] = useState(``)
-  const [productQuantity, setProductQuantity] = useState(``)
+    useState(false);
+  const [productPrice, setProductPrice] = useState(``);
+  const [productQuantity, setProductQuantity] = useState(``);
 
   const allInputIsNotEmpty = useMemo(
     () =>
@@ -27,19 +27,15 @@ export default function AddProductModal({
       productPrice.length > 0 &&
       productQuantity.length > 0,
     [productName, productPrice, productQuantity]
-<<<<<<< HEAD:components/AddProductModal/index.tsx
-  )
-=======
   );
->>>>>>> feat: hotfix:pages/components/AddProductModal/index.tsx
 
   useEffect(() => {
     if (allInputIsNotEmpty) {
-      setButtonDisabled(false)
+      setButtonDisabled(false);
     } else {
-      setButtonDisabled(true)
+      setButtonDisabled(true);
     }
-  }, [allInputIsNotEmpty])
+  }, [allInputIsNotEmpty]);
 
   const handleAddProduct = () => {
     if (allInputIsNotEmpty) {
@@ -47,15 +43,15 @@ export default function AddProductModal({
         productName,
         productQuantity,
         productPrice: `${Number(productPrice) * Number(productQuantity)}`,
-      }
+      };
 
-      handleProducts(product)
+      handleProducts(product);
     }
 
-    setProductName(``)
-    setProductPrice(``)
-    setProductQuantity(``)
-  }
+    setProductName(``);
+    setProductPrice(``);
+    setProductQuantity(``);
+  };
 
   const modifiedPlaceholdeToPrice = useMemo(
     () =>
@@ -63,11 +59,7 @@ export default function AddProductModal({
         ? `Preço do Produto por KG`
         : `Preço do Produto`,
     [thisProductIsSellByWeight]
-<<<<<<< HEAD:components/AddProductModal/index.tsx
-  )
-=======
   );
->>>>>>> feat: hotfix:pages/components/AddProductModal/index.tsx
 
   const modifiedPlaceholdeToQuantity = useMemo(
     () =>
@@ -75,11 +67,7 @@ export default function AddProductModal({
         ? `Quantidade do Produto por KG`
         : `Quantidade do Produto`,
     [thisProductIsSellByWeight]
-<<<<<<< HEAD:components/AddProductModal/index.tsx
-  )
-=======
   );
->>>>>>> feat: hotfix:pages/components/AddProductModal/index.tsx
 
   return (
     <>
@@ -154,5 +142,5 @@ export default function AddProductModal({
         </Dialog>
       )}
     </>
-  )
+  );
 }
