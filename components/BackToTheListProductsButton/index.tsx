@@ -23,5 +23,9 @@ export default function BackToTheListProductsButton({
         </span>
       </button>
     </div>
+<<<<<<< HEAD:components/BackToTheListProductsButton/index.tsx
   ) : null
+=======
+  ) : null;
+>>>>>>> feat: hotfix:pages/components/BackToTheListProductsButton/index.tsx
 }

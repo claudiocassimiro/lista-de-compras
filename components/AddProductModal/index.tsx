@@ -27,7 +27,11 @@ export default function AddProductModal({
       productPrice.length > 0 &&
       productQuantity.length > 0,
     [productName, productPrice, productQuantity]
+<<<<<<< HEAD:components/AddProductModal/index.tsx
   )
+=======
+  );
+>>>>>>> feat: hotfix:pages/components/AddProductModal/index.tsx
 
   useEffect(() => {
     if (allInputIsNotEmpty) {
@@ -59,7 +63,11 @@ export default function AddProductModal({
         ? `Preço do Produto por KG`
         : `Preço do Produto`,
     [thisProductIsSellByWeight]
+<<<<<<< HEAD:components/AddProductModal/index.tsx
   )
+=======
+  );
+>>>>>>> feat: hotfix:pages/components/AddProductModal/index.tsx
 
   const modifiedPlaceholdeToQuantity = useMemo(
     () =>
@@ -67,7 +75,11 @@ export default function AddProductModal({
         ? `Quantidade do Produto por KG`
         : `Quantidade do Produto`,
     [thisProductIsSellByWeight]
+<<<<<<< HEAD:components/AddProductModal/index.tsx
   )
+=======
+  );
+>>>>>>> feat: hotfix:pages/components/AddProductModal/index.tsx
 
   return (
     <>

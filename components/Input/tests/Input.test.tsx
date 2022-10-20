@@ -25,8 +25,13 @@ describe(`Test render Input`, () => {
 
       expect(
         screen.getByTestId(`inputs-different-than-checkbox`)
+<<<<<<< HEAD:components/Input/tests/Input.test.tsx
       ).toBeInTheDocument()
     })
+=======
+      ).toBeInTheDocument();
+    });
+>>>>>>> feat: hotfix:pages/components/Input/tests/Input.test.tsx
 
     test(`is different to "checkbox", shouldn't return an input element with testId equal to "input-checkbox"`, () => {
       render(<Input {...mockProps} />)
@@ -55,7 +60,14 @@ describe(`Test render Input`, () => {
 
       expect(
         screen.queryByTestId(`inputs-different-than-checkbox`)
+<<<<<<< HEAD:components/Input/tests/Input.test.tsx
       ).not.toBeInTheDocument()
     })
   })
 })
+=======
+      ).not.toBeInTheDocument();
+    });
+  });
+});
+>>>>>>> feat: hotfix:pages/components/Input/tests/Input.test.tsx
