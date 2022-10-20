@@ -16,6 +16,7 @@ export default function AddProductModal({
   const modal = useDialogState();
   const [buttonDisabled, setButtonDisabled] = useState<boolean>();
   const [productName, setProductName] = useState(``);
+  const [thisProductIsSellByWeight, setThisProductIsSellByWeight] = useState(false);
   const [productPrice, setProductPrice] = useState(``);
   const [productQuantity, setProductQuantity] = useState(``);
 
@@ -52,6 +53,16 @@ export default function AddProductModal({
     setProductQuantity(``);
   };
 
+  const modifiedPlaceholdeToPrice = useMemo(() => (
+    thisProductIsSellByWeight ? `Preço do Produto por KG` : `Preço do Produto`
+  ), [thisProductIsSellByWeight]);
+
+  const modifiedPlaceholdeToQuantity = useMemo(() => (
+    thisProductIsSellByWeight ? `Quantidade do Produto por KG` : `Quantidade do Produto`
+  ), [thisProductIsSellByWeight]);
+
+
+
   return (
     <>
       <DialogDisclosure
@@ -78,12 +89,22 @@ export default function AddProductModal({
                   placeholder="Nome do Produto"
                   onChange={setProductName}
                 />
+                <label htmlFor="radio-kg" className={styles.label}>
+                  <Input
+                    id="radio-kg"
+                    type="checkbox"
+                    name="productWeight"
+                    checked={thisProductIsSellByWeight}
+                    onChange={() => setThisProductIsSellByWeight(!thisProductIsSellByWeight)}
+                  />
+                  Esse produto é vendido por KG?
+                </label>
                 <Input
                   className={styles.addProductModalInput}
                   name="productPrice"
                   value={productPrice}
                   type="number" 
-                  placeholder="Preço do Produto"
+                  placeholder={modifiedPlaceholdeToPrice}
                   onChange={setProductPrice}
                 />
                 <Input
@@ -91,7 +112,7 @@ export default function AddProductModal({
                   name="productQuantity"
                   value={productQuantity}
                   type="number" 
-                  placeholder="Quantidade do Produto"
+                  placeholder={modifiedPlaceholdeToQuantity}
                   onChange={setProductQuantity}
                 />
             </div>
