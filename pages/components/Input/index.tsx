@@ -3,10 +3,12 @@ import cn from 'classnames';
 
 export interface InputProps {
   type: string;
-  placeholder: string;
+  placeholder?: string;
   name: string;
-  value: string;
+  value?: string;
+  id?: string;
   onChange: (value: string) => void;
+  checked?: boolean;
   className?: string;
 }
 
@@ -15,17 +17,30 @@ export default function Input({
   placeholder,
   name,
   value,
+  id,
   onChange,
+  checked,
   className,
 }: InputProps) {
-  return (
+  return type !== 'checkbox' ? (
     <input
-      className={cn(styles.input, className)}
+      data-testid="inputs-different-than-checkbox"
       type={type}
       placeholder={placeholder}
       name={name}
       value={value}
       onChange={(e) => onChange(e?.target?.value)}
+      className={cn(styles.input, className)}
+    />
+  ) : (
+    <input
+      data-testid="input-checkbox"
+      type={type}
+      name={name}
+      id={id}
+      checked={checked}
+      onChange={(e) => onChange(e?.target?.value)}
+      className={cn(styles.inputCheckBox, className)}
     />
   );
 }
