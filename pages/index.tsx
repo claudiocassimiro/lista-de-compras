@@ -1,29 +1,29 @@
-import type { NextPage } from 'next'
-import { useState } from 'react'
-import styles from '../styles/Home.module.css'
-import AddProductModal from '../components/AddProductModal'
-import BackToTheListProductsButton from '../components/BackToTheListProductsButton'
-import Header from '../components/Header'
-import RenderProducts from '../components/RenderProducts'
-import SearchByProduct from '../components/SearchByProduct'
+import type { NextPage } from 'next';
+import { useState } from 'react';
+import styles from '../styles/Home.module.css';
+import AddProductModal from '../components/AddProductModal';
+import BackToTheListProductsButton from '../components/BackToTheListProductsButton';
+import Header from '../components/Header';
+import RenderProducts from '../components/RenderProducts';
+import SearchByProduct from '../components/SearchByProduct';
 
 export interface Product {
-  productName: string
-  productPrice: string
-  thisProductIsSellByWeight?: boolean
-  productQuantity: string
+  productName: string;
+  productPrice: string;
+  thisProductIsSellByWeight?: boolean;
+  productQuantity: string;
 }
 
 const Home: NextPage = () => {
-  const [products, setProducts] = useState<Product[]>([])
-  const [filteredProduct, setFilteredProduct] = useState<Product[]>()
-  const [renderBackToListButton, setRenderBackToListButton] = useState(false)
+  const [products, setProducts] = useState<Product[]>([]);
+  const [filteredProduct, setFilteredProduct] = useState<Product[]>();
+  const [renderBackToListButton, setRenderBackToListButton] = useState(false);
 
   const handleProducts = (product: Product) => {
     if (products?.find((p) => p?.productName === product?.productName)) {
       return setProducts(
-        products.map((p) => {
-          return p.productName === product.productName
+        products.map((p) =>
+          p.productName === product.productName
             ? {
                 productName: p.productName,
                 productQuantity: `${
@@ -39,38 +39,38 @@ const Home: NextPage = () => {
                 productPrice: `${
                   Number(p.productPrice) * Number(p.productQuantity)
                 }`,
-              }
-        })
-      )
+              },
+        ),
+      );
     }
 
-    setProducts([...products, product])
-  }
+    setProducts([...products, product]);
+  };
 
   const handleFilteredProduct = (term: string) => {
     if (term === ``) {
-      setRenderBackToListButton(false)
-      return setFilteredProduct(products)
+      setRenderBackToListButton(false);
+      return setFilteredProduct(products);
     }
 
     const product = products?.filter((product) =>
-      product?.productName?.toLowerCase()?.includes(term?.toLowerCase())
-    )
+      product?.productName?.toLowerCase()?.includes(term?.toLowerCase()),
+    );
 
-    setRenderBackToListButton(true)
-    return setFilteredProduct(product)
-  }
+    setRenderBackToListButton(true);
+    return setFilteredProduct(product);
+  };
 
   const handleRemoveProduct = (index: number) => {
-    const newProducts = products?.filter((_product, i) => i !== index)
+    const newProducts = products?.filter((_product, i) => i !== index);
 
-    setProducts(newProducts)
+    setProducts(newProducts);
     setFilteredProduct(
       newProducts?.filter(
-        (product) => product.productName !== newProducts[index]?.productName
-      )
-    )
-  }
+        (product) => product.productName !== newProducts[index]?.productName,
+      ),
+    );
+  };
 
   return (
     <div className={styles.container}>
@@ -94,7 +94,7 @@ const Home: NextPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

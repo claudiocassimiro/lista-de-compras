@@ -1,10 +1,10 @@
-import { TbArrowBack } from 'react-icons/tb'
-import { Product } from '../../pages'
-import styles from './styles.module.css'
+import { TbArrowBack } from 'react-icons/tb';
+import { Product } from '../../pages';
+import styles from './styles.module.css';
 
 export interface BackToTheListProductsButtonProps {
-  setFilteredProduct: (product: Product[]) => void
-  filteredProduct: Product[] | undefined
+  setFilteredProduct: (product: Product[]) => void;
+  filteredProduct: Product[] | undefined;
 }
 
 export default function BackToTheListProductsButton({
@@ -14,6 +14,7 @@ export default function BackToTheListProductsButton({
   return filteredProduct && filteredProduct.length > 0 ? (
     <div className={styles.backToTheListProductsContainer}>
       <button
+        type="button"
         className={styles.backToTheListProductsBackButton}
         onClick={() => setFilteredProduct([])}
       >
@@ -23,5 +24,5 @@ export default function BackToTheListProductsButton({
         </span>
       </button>
     </div>
-  ) : null
+  ) : null;
 }
