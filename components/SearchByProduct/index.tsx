@@ -4,16 +4,24 @@ import styles from './styles.module.css';
 
 export interface SearchByProductProps {
   handleFilteredProduct: (term: string) => void;
+  renderBackToListButton: boolean;
 }
 
 export default function SearchByProduct({
   handleFilteredProduct,
+  renderBackToListButton,
 }: SearchByProductProps) {
   const [searchedProduct, setSearchedProduct] = useState(``);
 
   useEffect(() => {
     handleFilteredProduct(searchedProduct);
   }, [handleFilteredProduct, searchedProduct]);
+
+  useEffect(() => {
+    if (renderBackToListButton === false) {
+      setSearchedProduct(``);
+    }
+  }, [renderBackToListButton]);
 
   return (
     <div className={styles.searchByProductContainer}>
