@@ -53,12 +53,12 @@ const Home: NextPage = () => {
       return setFilteredProduct(products);
     }
 
-    const product = products?.filter((product) =>
+    const serchedProduct = products?.filter((product) =>
       product?.productName?.toLowerCase()?.includes(term?.toLowerCase()),
     );
 
     setRenderBackToListButton(true);
-    return setFilteredProduct(product);
+    return setFilteredProduct(serchedProduct);
   };
 
   const handleRemoveProduct = (index: number) => {
@@ -76,7 +76,10 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <Header />
       <div className={styles.homePageContent}>
-        <SearchByProduct handleFilteredProduct={handleFilteredProduct} />
+        <SearchByProduct
+          renderBackToListButton={renderBackToListButton}
+          handleFilteredProduct={handleFilteredProduct}
+        />
         <AddProductModal handleProducts={handleProducts} />
         <hr className={styles.divider} />
         <div className={styles.homePageWrapper}>
@@ -84,6 +87,7 @@ const Home: NextPage = () => {
             <BackToTheListProductsButton
               filteredProduct={filteredProduct}
               setFilteredProduct={setFilteredProduct}
+              setRenderBackToListButton={setRenderBackToListButton}
             />
           )}
           <RenderProducts
