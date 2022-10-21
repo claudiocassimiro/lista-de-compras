@@ -18,6 +18,7 @@ export default function RenderProducts({
       {filteredProduct?.length > 0
         ? filteredProduct?.map((product, index) => (
             <div
+              data-testid="filtered-products"
               className={styles.renderProductsProductWrapper}
               key={`${product?.productName}-${index + 1}`}
             >
@@ -38,6 +39,7 @@ export default function RenderProducts({
           ))
         : products?.map((product, index) => (
             <div
+              data-testid="products"
               className={styles.renderProductsProductWrapper}
               key={`${product?.productName}-${index + 1}`}
             >
