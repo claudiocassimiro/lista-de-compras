@@ -2,7 +2,8 @@
   "settings": {
     "react": {
       "version": "detect"
-    }
+    },
+    "import/no-unresolved": "off"
   },
   "env": {
     "browser": true,
