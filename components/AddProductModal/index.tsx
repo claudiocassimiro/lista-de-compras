@@ -58,6 +58,7 @@ export default function AddProductModal({
       thisProductIsSellByWeight
         ? `Preço do Produto por KG`
         : `Preço do Produto`,
+
     [thisProductIsSellByWeight],
   );
 
@@ -76,7 +77,7 @@ export default function AddProductModal({
         {...modal}
       >
         <span className={styles.addProductModalButtonText}>
-          Adicionar um Produdo
+          Adicionar um Produto
         </span>
         <BsFillPlusCircleFill size="20" />
       </DialogDisclosure>
