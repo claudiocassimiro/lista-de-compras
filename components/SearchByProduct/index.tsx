@@ -15,7 +15,8 @@ export default function SearchByProduct({
 
   useEffect(() => {
     handleFilteredProduct(searchedProduct);
-  }, [handleFilteredProduct, searchedProduct]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchedProduct]);
 
   useEffect(() => {
     if (renderBackToListButton === false) {
