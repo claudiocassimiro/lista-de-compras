@@ -2,16 +2,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+You need to have the following versions of node and yarn:
+
+- Node v14.20.1
+- Yarn v1.22.19
+
 First, you have to install the depedencies using yarn for this:
 
 ```bash
 yarn
-```
-
-Good, now you have all dependencies installed, but you have to active the husky:
-
-```bash
-yarn husky install
 ```
 
 Excellent, now you can running the project with:
