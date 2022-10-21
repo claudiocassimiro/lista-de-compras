@@ -21,6 +21,7 @@ export default function BackToTheListProductsButton({
   return filteredProduct && filteredProduct.length > 0 ? (
     <div className={styles.backToTheListProductsContainer}>
       <button
+        data-testid="back-button"
         type="button"
         className={styles.backToTheListProductsBackButton}
         onClick={handleClick}
