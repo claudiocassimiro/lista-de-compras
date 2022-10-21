@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint ./ --ext js,jsx,ts,tsx",
     "test": "jest --watch",
+    "test-prepush": "jest",
     "format": "prettier --ignore-path .gitignore \"**/*.+(ts|js|tsx)\" --write",
     "type-check": "tsc",
     "prepare": "husky install",
