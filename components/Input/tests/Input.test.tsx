@@ -12,10 +12,10 @@ describe(`Test render Input`, () => {
   });
 
   const mockProps = {
-    type: 'text',
-    name: 'mockName',
-    value: 'mockValue',
-    placeholder: 'mockPlaceholder',
+    type: `text`,
+    name: `mockName`,
+    value: `mockValue`,
+    placeholder: `mockPlaceholder`,
     onChange: jest.fn(),
   };
 
@@ -24,7 +24,7 @@ describe(`Test render Input`, () => {
       render(<Input {...mockProps} />);
 
       expect(
-        screen.getByTestId(`inputs-different-than-checkbox`)
+        screen.getByTestId(`inputs-different-than-checkbox`),
       ).toBeInTheDocument();
     });
 
@@ -37,7 +37,7 @@ describe(`Test render Input`, () => {
     test(`is equal to "checkbox", should return an input element with testId equal to "input-checkbox"`, () => {
       const modifiedMockProps = {
         ...mockProps,
-        type: 'checkbox',
+        type: `checkbox`,
       };
 
       render(<Input {...modifiedMockProps} />);
@@ -48,13 +48,13 @@ describe(`Test render Input`, () => {
     test(`is equal to "checkbox", shouldn't return an input element with testId equal to "inputs-different-than-checkbox"`, () => {
       const modifiedMockProps = {
         ...mockProps,
-        type: 'checkbox',
+        type: `checkbox`,
       };
 
       render(<Input {...modifiedMockProps} />);
 
       expect(
-        screen.queryByTestId(`inputs-different-than-checkbox`)
+        screen.queryByTestId(`inputs-different-than-checkbox`),
       ).not.toBeInTheDocument();
     });
   });

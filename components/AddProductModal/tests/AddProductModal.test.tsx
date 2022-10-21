@@ -31,7 +31,7 @@ describe(`AddProductModal`, () => {
       userEvent.click(screen.getByText(`Adicionar um Produto`));
 
       expect(
-        await screen.findByText(`Adicione um Produto`)
+        await screen.findByText(`Adicione um Produto`),
       ).toBeInTheDocument();
     });
 
@@ -43,7 +43,7 @@ describe(`AddProductModal`, () => {
       userEvent.click(screen.getByText(`Adicionar um Produto`));
 
       expect(
-        await screen.findByPlaceholderText(`Nome do Produto`)
+        await screen.findByPlaceholderText(`Nome do Produto`),
       ).toBeInTheDocument();
     });
 
@@ -55,7 +55,7 @@ describe(`AddProductModal`, () => {
       userEvent.click(screen.getByText(`Adicionar um Produto`));
 
       expect(
-        await screen.findByLabelText(`Esse produto é vendido por KG?`)
+        await screen.findByLabelText(`Esse produto é vendido por KG?`),
       ).toBeInTheDocument();
     });
 
@@ -67,7 +67,7 @@ describe(`AddProductModal`, () => {
       userEvent.click(screen.getByText(`Adicionar um Produto`));
 
       expect(
-        await screen.findByPlaceholderText(`Preço do Produto`)
+        await screen.findByPlaceholderText(`Preço do Produto`),
       ).toBeInTheDocument();
     });
 
@@ -79,7 +79,7 @@ describe(`AddProductModal`, () => {
       userEvent.click(screen.getByText(`Adicionar um Produto`));
 
       expect(
-        await screen.findByPlaceholderText(`Quantidade do Produto`)
+        await screen.findByPlaceholderText(`Quantidade do Produto`),
       ).toBeInTheDocument();
     });
 
@@ -92,21 +92,21 @@ describe(`AddProductModal`, () => {
         userEvent.click(screen.getByText(`Adicionar um Produto`));
 
         expect(
-          await screen.findByLabelText(`Esse produto é vendido por KG?`)
+          await screen.findByLabelText(`Esse produto é vendido por KG?`),
         ).toBeInTheDocument();
 
         userEvent.click(
-          screen.getByLabelText(`Esse produto é vendido por KG?`)
+          screen.getByLabelText(`Esse produto é vendido por KG?`),
         );
 
         await waitFor(() =>
           expect(
-            screen.queryByPlaceholderText(`Preço do Produto`)
-          ).not.toBeInTheDocument()
+            screen.queryByPlaceholderText(`Preço do Produto`),
+          ).not.toBeInTheDocument(),
         );
 
         expect(
-          await screen.findByPlaceholderText(`Preço do Produto por KG`)
+          await screen.findByPlaceholderText(`Preço do Produto por KG`),
         ).toBeInTheDocument();
       });
 
@@ -118,21 +118,21 @@ describe(`AddProductModal`, () => {
         userEvent.click(screen.getByText(`Adicionar um Produto`));
 
         expect(
-          await screen.findByLabelText(`Esse produto é vendido por KG?`)
+          await screen.findByLabelText(`Esse produto é vendido por KG?`),
         ).toBeInTheDocument();
 
         userEvent.click(
-          screen.getByLabelText(`Esse produto é vendido por KG?`)
+          screen.getByLabelText(`Esse produto é vendido por KG?`),
         );
 
         await waitFor(() =>
           expect(
-            screen.queryByPlaceholderText(`Quantidade do Produto`)
-          ).not.toBeInTheDocument()
+            screen.queryByPlaceholderText(`Quantidade do Produto`),
+          ).not.toBeInTheDocument(),
         );
 
         expect(
-          await screen.findByPlaceholderText(`Quantidade do Produto por KG`)
+          await screen.findByPlaceholderText(`Quantidade do Produto por KG`),
         ).toBeInTheDocument();
       });
     });

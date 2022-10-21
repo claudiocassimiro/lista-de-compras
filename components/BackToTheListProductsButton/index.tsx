@@ -14,6 +14,7 @@ export default function BackToTheListProductsButton({
   return filteredProduct && filteredProduct.length > 0 ? (
     <div className={styles.backToTheListProductsContainer}>
       <button
+        type="button"
         className={styles.backToTheListProductsBackButton}
         onClick={() => setFilteredProduct([])}
       >

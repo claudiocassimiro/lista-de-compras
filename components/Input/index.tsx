@@ -1,15 +1,15 @@
-import styles from './styles.module.css'
-import cn from 'classnames'
+import cn from 'classnames';
+import styles from './styles.module.css';
 
 export interface InputProps {
-  type: string
-  placeholder?: string
-  name: string
-  value?: string
-  id?: string
-  onChange: (value: string) => void
-  checked?: boolean
-  className?: string
+  type: string;
+  placeholder?: string;
+  name: string;
+  value?: string;
+  id?: string;
+  onChange: (value: string) => void;
+  checked?: boolean;
+  className?: string;
 }
 
 export default function Input({
@@ -22,7 +22,7 @@ export default function Input({
   checked,
   className,
 }: InputProps) {
-  return type !== 'checkbox' ? (
+  return type !== `checkbox` ? (
     <input
       data-testid="inputs-different-than-checkbox"
       type={type}
@@ -42,5 +42,5 @@ export default function Input({
       onChange={(e) => onChange(e?.target?.value)}
       className={cn(styles.inputCheckBox, className)}
     />
-  )
+  );
 }

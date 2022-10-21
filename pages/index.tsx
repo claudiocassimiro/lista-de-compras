@@ -22,8 +22,8 @@ const Home: NextPage = () => {
   const handleProducts = (product: Product) => {
     if (products?.find((p) => p?.productName === product?.productName)) {
       return setProducts(
-        products.map((p) => {
-          return p.productName === product.productName
+        products.map((p) =>
+          p.productName === product.productName
             ? {
                 productName: p.productName,
                 productQuantity: `${
@@ -39,8 +39,8 @@ const Home: NextPage = () => {
                 productPrice: `${
                   Number(p.productPrice) * Number(p.productQuantity)
                 }`,
-              };
-        })
+              },
+        ),
       );
     }
 
@@ -54,7 +54,7 @@ const Home: NextPage = () => {
     }
 
     const product = products?.filter((product) =>
-      product?.productName?.toLowerCase()?.includes(term?.toLowerCase())
+      product?.productName?.toLowerCase()?.includes(term?.toLowerCase()),
     );
 
     setRenderBackToListButton(true);
@@ -67,8 +67,8 @@ const Home: NextPage = () => {
     setProducts(newProducts);
     setFilteredProduct(
       newProducts?.filter(
-        (product) => product.productName !== newProducts[index]?.productName
-      )
+        (product) => product.productName !== newProducts[index]?.productName,
+      ),
     );
   };
 

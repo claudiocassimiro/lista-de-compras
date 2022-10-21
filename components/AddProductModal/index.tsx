@@ -1,9 +1,9 @@
-import styles from './styles.module.css';
 import { useDialogState, Dialog, DialogDisclosure } from 'reakit/Dialog';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
-import Input from '../Input';
 import { useState, useEffect, useMemo } from 'react';
+import Input from '../Input';
+import styles from './styles.module.css';
 import { Product } from '../../pages';
 
 export interface AddProductModalProps {
@@ -26,7 +26,7 @@ export default function AddProductModal({
       productName.length > 0 &&
       productPrice.length > 0 &&
       productQuantity.length > 0,
-    [productName, productPrice, productQuantity]
+    [productName, productPrice, productQuantity],
   );
 
   useEffect(() => {
@@ -58,7 +58,8 @@ export default function AddProductModal({
       thisProductIsSellByWeight
         ? `Preço do Produto por KG`
         : `Preço do Produto`,
-    [thisProductIsSellByWeight]
+
+    [thisProductIsSellByWeight],
   );
 
   const modifiedPlaceholdeToQuantity = useMemo(
@@ -66,7 +67,7 @@ export default function AddProductModal({
       thisProductIsSellByWeight
         ? `Quantidade do Produto por KG`
         : `Quantidade do Produto`,
-    [thisProductIsSellByWeight]
+    [thisProductIsSellByWeight],
   );
 
   return (
