@@ -1,5 +1,6 @@
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Product } from '../../pages';
+import EmptyState from '../EmptyState';
 import styles from './styles.module.css';
 
 export interface RenderProductsProps {
@@ -38,5 +39,7 @@ export default function RenderProducts({
         ))}
       </div>
     </div>
-  ) : null; // TODO: render empty page
+  ) : (
+    <EmptyState />
+  );
 }
