@@ -105,7 +105,7 @@ const Home: NextPage = () => {
             />
           ) : (
             <RenderFilteredProducts
-              filteredProduct={filteredProducts}
+              filteredProducts={filteredProducts}
               handleRemoveProduct={handleRemoveProduct}
             />
           )}
