@@ -312,5 +312,151 @@ describe(`Index`, () => {
 
       expect(screen.getByText(`arroz`)).toBeInTheDocument();
     });
+
+    test(`after searching for a product, and the user use back-button to back to the original list of products the search input should be empty`, async () => {
+      render(<Index />);
+
+      expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
+
+      userEvent.click(
+        screen.getByRole(`button`, { name: `Adicionar um Produto` }),
+      );
+
+      expect(
+        await screen.findByPlaceholderText(`Nome do Produto`),
+      ).toBeInTheDocument();
+
+      expect(
+        await screen.findByPlaceholderText(`Preço do Produto`),
+      ).toBeInTheDocument();
+
+      expect(
+        await screen.findByPlaceholderText(`Quantidade do Produto`),
+      ).toBeInTheDocument();
+
+      const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+      const priceProductInput = screen.getByPlaceholderText(`Preço do Produto`);
+      const quantityProductInput = screen.getByPlaceholderText(
+        `Quantidade do Produto`,
+      );
+
+      await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+      await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+      await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+      const addProductButton = screen.getByRole(`button`, {
+        name: `Adicionar`,
+      });
+
+      await waitFor(() => userEvent.click(addProductButton));
+
+      await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+      await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+      await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+      await waitFor(() => userEvent.click(addProductButton));
+
+      await waitFor(() => userEvent.click(screen.getByTestId(`close-button`)));
+
+      const searchInput = screen.getByPlaceholderText(
+        `Pesquise um produto na lista`,
+      );
+
+      expect(searchInput).toBeInTheDocument();
+
+      await waitFor(() => userEvent.type(searchInput, `feijão puro`));
+
+      expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+
+      expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
+
+      const backButton = screen.getByTestId(`back-button`);
+
+      expect(backButton).toBeInTheDocument();
+
+      await waitFor(() => userEvent.click(backButton));
+
+      expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+
+      expect(screen.getByText(`arroz`)).toBeInTheDocument();
+
+      expect(searchInput).toHaveTextContent(``);
+    });
+
+    test(`after searching for a product, the user can delete a specific product in the filtered list`, async () => {
+      render(<Index />);
+
+      expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
+
+      userEvent.click(
+        screen.getByRole(`button`, { name: `Adicionar um Produto` }),
+      );
+
+      expect(
+        await screen.findByPlaceholderText(`Nome do Produto`),
+      ).toBeInTheDocument();
+
+      expect(
+        await screen.findByPlaceholderText(`Preço do Produto`),
+      ).toBeInTheDocument();
+
+      expect(
+        await screen.findByPlaceholderText(`Quantidade do Produto`),
+      ).toBeInTheDocument();
+
+      const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+      const priceProductInput = screen.getByPlaceholderText(`Preço do Produto`);
+      const quantityProductInput = screen.getByPlaceholderText(
+        `Quantidade do Produto`,
+      );
+
+      await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+      await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+      await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+      const addProductButton = screen.getByRole(`button`, {
+        name: `Adicionar`,
+      });
+
+      await waitFor(() => userEvent.click(addProductButton));
+
+      await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+      await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+      await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+      await waitFor(() => userEvent.click(addProductButton));
+
+      await waitFor(() => userEvent.click(screen.getByTestId(`close-button`)));
+
+      const searchInput = screen.getByPlaceholderText(
+        `Pesquise um produto na lista`,
+      );
+
+      expect(searchInput).toBeInTheDocument();
+
+      await waitFor(() => userEvent.type(searchInput, `feijão puro`));
+
+      expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+
+      expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
+
+      await waitFor(() =>
+        userEvent.click(screen.getByTestId(`delete-product`)),
+      );
+
+      expect(screen.getByText(`arroz`)).toBeInTheDocument();
+
+      expect(screen.queryByText(`feijão puro`)).not.toBeInTheDocument();
+
+      expect(searchInput).toHaveTextContent(``);
+    });
   });
 });
