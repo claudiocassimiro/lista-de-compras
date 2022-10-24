@@ -16,7 +16,7 @@ export default function RenderProducts({
       <div className={styles.renderProductsContainer}>
         {products?.map((product, index) => (
           <div
-            data-testid="filtered-products"
+            data-testid="products"
             className={styles.renderProductsProductWrapper}
             key={`${product?.productName}-${index + 1}`}
           >
