@@ -6,12 +6,10 @@ export interface BackToTheListProductsButtonProps {
   setFilteredProduct: (product: Product[]) => void;
   setRenderBackToListButton: (value: boolean) => void;
   setRenderSearchNotFound: (value: boolean) => void;
-  filteredProduct: Product[];
 }
 
 export default function BackToTheListProductsButton({
   setFilteredProduct,
-  filteredProduct,
   setRenderBackToListButton,
   setRenderSearchNotFound,
 }: BackToTheListProductsButtonProps) {
@@ -21,7 +19,7 @@ export default function BackToTheListProductsButton({
     setFilteredProduct([]);
   };
 
-  return filteredProduct && filteredProduct.length > 0 ? (
+  return (
     <div className={styles.backToTheListProductsContainer}>
       <button
         data-testid="back-button"
@@ -35,5 +33,5 @@ export default function BackToTheListProductsButton({
         </span>
       </button>
     </div>
-  ) : null;
+  );
 }
