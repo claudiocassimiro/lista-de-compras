@@ -6,6 +6,7 @@ import BackToTheListProductsButton from '../components/BackToTheListProductsButt
 import Header from '../components/Header';
 import RenderProducts from '../components/RenderProducts';
 import SearchByProduct from '../components/SearchByProduct';
+import RenderFilteredProducts from '../components/RenderFilteredProducts';
 
 export interface Product {
   productName: string;
@@ -16,8 +17,9 @@ export interface Product {
 
 const Home: NextPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [filteredProduct, setFilteredProduct] = useState<Product[]>();
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [renderBackToListButton, setRenderBackToListButton] = useState(false);
+  const [renderSearchNotFound, setRenderSearchNotFound] = useState(false);
 
   const handleProducts = (product: Product) => {
     if (products?.find((p) => p?.productName === product?.productName)) {
@@ -50,22 +52,27 @@ const Home: NextPage = () => {
   const handleFilteredProduct = (term: string) => {
     if (term === ``) {
       setRenderBackToListButton(false);
-      return setFilteredProduct(products);
+      setRenderSearchNotFound(false);
+      return setFilteredProducts(products);
     }
 
     const serchedProduct = products?.filter((product) =>
       product?.productName?.toLowerCase()?.includes(term?.toLowerCase()),
     );
 
+    if (serchedProduct.length === 0) {
+      setRenderSearchNotFound(true);
+    }
+
     setRenderBackToListButton(true);
-    return setFilteredProduct(serchedProduct);
+    return setFilteredProducts(serchedProduct);
   };
 
   const handleRemoveProduct = (index: number) => {
     const newProducts = products?.filter((_product, i) => i !== index);
 
     setProducts(newProducts);
-    setFilteredProduct(
+    setFilteredProducts(
       newProducts?.filter(
         (product) => product.productName !== newProducts[index]?.productName,
       ),
@@ -83,18 +90,25 @@ const Home: NextPage = () => {
         <AddProductModal handleProducts={handleProducts} />
         <hr className={styles.divider} />
         <div className={styles.homePageWrapper}>
-          {renderBackToListButton && (
+          {renderBackToListButton ? (
             <BackToTheListProductsButton
-              filteredProduct={filteredProduct}
-              setFilteredProduct={setFilteredProduct}
+              filteredProduct={filteredProducts}
+              setFilteredProduct={setFilteredProducts}
               setRenderBackToListButton={setRenderBackToListButton}
+              setRenderSearchNotFound={setRenderSearchNotFound}
+            />
+          ) : null}
+          {filteredProducts?.length === 0 && !renderSearchNotFound ? (
+            <RenderProducts
+              products={products}
+              handleRemoveProduct={handleRemoveProduct}
+            />
+          ) : (
+            <RenderFilteredProducts
+              filteredProduct={filteredProducts}
+              handleRemoveProduct={handleRemoveProduct}
             />
           )}
-          <RenderProducts
-            products={products}
-            filteredProduct={filteredProduct || []}
-            handleRemoveProduct={handleRemoveProduct}
-          />
         </div>
       </div>
     </div>
