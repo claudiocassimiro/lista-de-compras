@@ -92,7 +92,6 @@ const Home: NextPage = () => {
         <div className={styles.homePageWrapper}>
           {renderBackToListButton ? (
             <BackToTheListProductsButton
-              filteredProduct={filteredProducts}
               setFilteredProduct={setFilteredProducts}
               setRenderBackToListButton={setRenderBackToListButton}
               setRenderSearchNotFound={setRenderSearchNotFound}
