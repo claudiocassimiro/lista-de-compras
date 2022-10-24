@@ -89,7 +89,11 @@ export default function AddProductModal({
         >
           <div className={styles.addProductModalHeadline}>
             <p className={styles.addProductModalTitle}>Adicione um Produto</p>
-            <AiOutlineClose size="28" onClick={modal.hide} />
+            <AiOutlineClose
+              data-testid="close-button"
+              size="28"
+              onClick={modal.hide}
+            />
           </div>
 
           <div className={styles.addProductModalContainerContent}>

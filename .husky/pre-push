@@ -3,4 +3,10 @@
 . "$(dirname "$0")/_/husky.sh"
 . "$(dirname "$0")/common.sh"
 
+branch=`git symbolic-ref HEAD`
+if [ "$branch" = "refs/heads/main" ]; then
+    echo "Direct commits to the main branch are not allowed."
+    exit 1
+fi
+
 yarn test-prepush  && yarn lint && yarn format && yarn type-check
