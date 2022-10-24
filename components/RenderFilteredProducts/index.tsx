@@ -4,13 +4,20 @@ import styles from './styles.module.css';
 
 export interface RenderProductsProps {
   filteredProducts: Product[];
-  handleRemoveProduct: (index: number) => void;
+  handleRemoveProduct: (productName: string) => void;
+  setRenderBackToListButton: (value: boolean) => void;
 }
 
 export default function RenderFilteredProducts({
   filteredProducts,
   handleRemoveProduct,
+  setRenderBackToListButton,
 }: RenderProductsProps) {
+  const handleDeleteProduct = (productName: string) => {
+    setRenderBackToListButton(false);
+    handleRemoveProduct(productName);
+  };
+
   return filteredProducts?.length > 0 ? (
     <div className={styles.renderProductsContainer}>
       {filteredProducts?.map((product, index) => (
@@ -30,7 +37,7 @@ export default function RenderFilteredProducts({
           </div>
           <AiOutlineCloseCircle
             size="25"
-            onClick={() => handleRemoveProduct(index)}
+            onClick={() => handleDeleteProduct(product?.productName)}
           />
         </div>
       ))}
