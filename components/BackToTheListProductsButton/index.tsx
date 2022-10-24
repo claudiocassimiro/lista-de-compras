@@ -5,16 +5,19 @@ import styles from './styles.module.css';
 export interface BackToTheListProductsButtonProps {
   setFilteredProduct: (product: Product[]) => void;
   setRenderBackToListButton: (value: boolean) => void;
-  filteredProduct: Product[] | undefined;
+  setRenderSearchNotFound: (value: boolean) => void;
+  filteredProduct: Product[];
 }
 
 export default function BackToTheListProductsButton({
   setFilteredProduct,
   filteredProduct,
   setRenderBackToListButton,
+  setRenderSearchNotFound,
 }: BackToTheListProductsButtonProps) {
   const handleClick = () => {
     setRenderBackToListButton(false);
+    setRenderSearchNotFound(false);
     setFilteredProduct([]);
   };
 
