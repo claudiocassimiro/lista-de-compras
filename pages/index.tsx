@@ -68,15 +68,13 @@ const Home: NextPage = () => {
     return setFilteredProducts(serchedProduct);
   };
 
-  const handleRemoveProduct = (index: number) => {
-    const newProducts = products?.filter((_product, i) => i !== index);
+  const handleRemoveProduct = (productName: string) => {
+    const newProducts = products.filter(
+      (product) => product.productName !== productName,
+    );
 
     setProducts(newProducts);
-    setFilteredProducts(
-      newProducts?.filter(
-        (product) => product.productName !== newProducts[index]?.productName,
-      ),
-    );
+    setFilteredProducts(newProducts);
   };
 
   return (
@@ -106,6 +104,7 @@ const Home: NextPage = () => {
             <RenderFilteredProducts
               filteredProducts={filteredProducts}
               handleRemoveProduct={handleRemoveProduct}
+              setRenderBackToListButton={setRenderBackToListButton}
             />
           )}
         </div>
