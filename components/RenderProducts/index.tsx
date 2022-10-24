@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 export interface RenderProductsProps {
   products: Product[];
-  handleRemoveProduct: (index: number) => void;
+  handleRemoveProduct: (productName: string) => void;
 }
 
 export default function RenderProducts({
@@ -31,7 +31,7 @@ export default function RenderProducts({
             </div>
             <AiOutlineCloseCircle
               size="25"
-              onClick={() => handleRemoveProduct(index)}
+              onClick={() => handleRemoveProduct(product?.productName)}
             />
           </div>
         ))}
