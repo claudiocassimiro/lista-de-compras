@@ -10,6 +10,7 @@ describe(`Index`, () => {
   afterEach(() => {
     cleanup();
     jest.resetAllMocks();
+    window.localStorage.clear();
   });
 
   describe(`Test of user behavior`, () => {
