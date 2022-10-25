@@ -1,0 +1,29 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 0.1rem solid #7c7c7c;
+  box-shadow: 0.5rem 0.5rem 1.3rem 0 #7c7c7c;
+  padding: 1.5rem;
+  width: 100vw;
+  height: 6.4rem;
+  margin-left: -2rem;
+}
+
+.containerInfos {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.footerTotalOfProducts,
+.footerTotalPrice {
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: -0.03rem;
+  line-height: 1.6rem;
+}
+
+.divider {
+  margin: 0;
+  height: 4rem;
+}
