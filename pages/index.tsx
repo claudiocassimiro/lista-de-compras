@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css';
 import AddProductModal from '../components/AddProductModal';
 import BackToTheListProductsButton from '../components/BackToTheListProductsButton';
@@ -46,8 +46,19 @@ const Home: NextPage = () => {
       );
     }
 
-    setProducts([...products, product]);
+    const newProducts = [...products, product];
+
+    setProducts(newProducts);
+    localStorage.setItem(`products`, JSON.stringify(newProducts as Product[]));
   };
+
+  useEffect(() => {
+    const savedProducts = JSON.parse(
+      localStorage.getItem(`products`) || `[]`,
+    ) as Product[];
+
+    setProducts(savedProducts);
+  }, []);
 
   const handleFilteredProduct = (term: string) => {
     if (term === ``) {
@@ -74,7 +85,8 @@ const Home: NextPage = () => {
     );
 
     setProducts(newProducts);
-    setFilteredProducts(newProducts);
+    setFilteredProducts([]);
+    localStorage.setItem(`products`, JSON.stringify(newProducts as Product[]));
   };
 
   return (
