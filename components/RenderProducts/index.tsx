@@ -30,6 +30,7 @@ export default function RenderProducts({
               </p>
             </div>
             <AiOutlineCloseCircle
+              data-testid="delete-product"
               size="25"
               onClick={() => handleRemoveProduct(product?.productName)}
             />
