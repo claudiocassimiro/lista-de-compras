@@ -9,15 +9,15 @@
 
 .emptyStateContainerImage {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 12rem;
+  height: 12rem;
 }
 
 .emptyStateText {
   display: flex;
   justify-content: center;
-  font-size: 14px;
-  width: 250px;
+  font-size: 1.4rem;
+  width: 25rem;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
