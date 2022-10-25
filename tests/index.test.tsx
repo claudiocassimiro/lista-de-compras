@@ -10,6 +10,7 @@ describe(`Index`, () => {
   afterEach(() => {
     cleanup();
     jest.resetAllMocks();
+    window.localStorage.clear();
   });
 
   describe(`Test of user behavior`, () => {
@@ -177,6 +178,158 @@ describe(`Index`, () => {
       products.forEach((product) => {
         expect(product).toBeInTheDocument();
       });
+    });
+
+    test(`when the user save products, the footer with total of products and total price should be in the document`, async () => {
+      render(<Index />);
+
+      const openModalButton = screen.getByRole(`button`, {
+        name: `Adicionar um Produto`,
+      });
+
+      expect(openModalButton).toBeInTheDocument();
+
+      userEvent.click(openModalButton);
+
+      expect(
+        await screen.findByPlaceholderText(`Nome do Produto`),
+      ).toBeInTheDocument();
+
+      expect(
+        await screen.findByPlaceholderText(`Preço do Produto`),
+      ).toBeInTheDocument();
+
+      expect(
+        await screen.findByPlaceholderText(`Quantidade do Produto`),
+      ).toBeInTheDocument();
+
+      const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+      const priceProductInput = screen.getByPlaceholderText(`Preço do Produto`);
+      const quantityProductInput = screen.getByPlaceholderText(
+        `Quantidade do Produto`,
+      );
+
+      await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+      await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+      await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+      const addProductButton = screen.getByRole(`button`, {
+        name: `Adicionar`,
+      });
+
+      await waitFor(() => userEvent.click(addProductButton));
+
+      await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+      await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+      await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+      await waitFor(() => userEvent.click(addProductButton));
+
+      await waitFor(() => userEvent.click(screen.getByTestId(`close-button`)));
+
+      const products = await screen.findAllByTestId(`products`);
+
+      expect(products.length).toEqual(2);
+
+      products.forEach((product) => {
+        expect(product).toBeInTheDocument();
+      });
+
+      expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+      expect(screen.getByTestId(`total-products`)).toHaveTextContent(
+        `Total de produtos: 2`,
+      );
+
+      expect(screen.getByTestId(`total-price`)).toHaveTextContent(
+        `Total: R$ 24,00`,
+      );
+    });
+
+    test(`when the user save products, and after remove a product, the values in footer should be updated`, async () => {
+      render(<Index />);
+
+      const openModalButton = screen.getByRole(`button`, {
+        name: `Adicionar um Produto`,
+      });
+
+      expect(openModalButton).toBeInTheDocument();
+
+      userEvent.click(openModalButton);
+
+      expect(
+        await screen.findByPlaceholderText(`Nome do Produto`),
+      ).toBeInTheDocument();
+
+      expect(
+        await screen.findByPlaceholderText(`Preço do Produto`),
+      ).toBeInTheDocument();
+
+      expect(
+        await screen.findByPlaceholderText(`Quantidade do Produto`),
+      ).toBeInTheDocument();
+
+      const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+      const priceProductInput = screen.getByPlaceholderText(`Preço do Produto`);
+      const quantityProductInput = screen.getByPlaceholderText(
+        `Quantidade do Produto`,
+      );
+
+      await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+      await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+      await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+      const addProductButton = screen.getByRole(`button`, {
+        name: `Adicionar`,
+      });
+
+      await waitFor(() => userEvent.click(addProductButton));
+
+      await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+      await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+      await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+      await waitFor(() => userEvent.click(addProductButton));
+
+      await waitFor(() => userEvent.click(screen.getByTestId(`close-button`)));
+
+      const products = await screen.findAllByTestId(`products`);
+
+      expect(products.length).toEqual(2);
+
+      products.forEach((product) => {
+        expect(product).toBeInTheDocument();
+      });
+
+      expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+      expect(screen.getByTestId(`total-products`)).toHaveTextContent(
+        `Total de produtos: 2`,
+      );
+
+      expect(screen.getByTestId(`total-price`)).toHaveTextContent(
+        `Total: R$ 24,00`,
+      );
+
+      await waitFor(() =>
+        userEvent.click(screen.getAllByTestId(`delete-product`)[0]),
+      );
+
+      expect(await screen.findByTestId(`total-products`)).toHaveTextContent(
+        `Total de produtos: 1`,
+      );
+
+      expect(await screen.findByTestId(`total-price`)).toHaveTextContent(
+        `Total: R$ 14,00`,
+      );
     });
 
     test(`with products in list, if the user search by product should return only the serched product`, async () => {
