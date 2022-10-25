@@ -20,6 +20,58 @@ describe(`Index`, () => {
       expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
     });
 
+    test(`if there is no product in the list, the empty state must be rendered`, () => {
+      render(<Index />);
+
+      expect(screen.getByTestId(`empty-state`)).toBeInTheDocument();
+    });
+
+    test(`if there is a product in the list, empty state should not be rendered`, async () => {
+      render(<Index />);
+
+      const openModalButton = screen.getByRole(`button`, {
+        name: `Adicionar um Produto`,
+      });
+
+      expect(openModalButton).toBeInTheDocument();
+
+      userEvent.click(openModalButton);
+
+      expect(
+        await screen.findByPlaceholderText(`Nome do Produto`),
+      ).toBeInTheDocument();
+
+      expect(
+        await screen.findByPlaceholderText(`Preço do Produto`),
+      ).toBeInTheDocument();
+
+      expect(
+        await screen.findByPlaceholderText(`Quantidade do Produto`),
+      ).toBeInTheDocument();
+
+      const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+      const priceProductInput = screen.getByPlaceholderText(`Preço do Produto`);
+      const quantityProductInput = screen.getByPlaceholderText(
+        `Quantidade do Produto`,
+      );
+
+      await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+      await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+      await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+      const addProductButton = screen.getByRole(`button`, {
+        name: `Adicionar`,
+      });
+
+      await waitFor(() => userEvent.click(addProductButton));
+
+      await waitFor(() => userEvent.click(screen.getByTestId(`close-button`)));
+
+      expect(screen.queryByTestId(`empty-state`)).not.toBeInTheDocument();
+    });
+
     test(`should have a element with testid "close-button"`, async () => {
       render(<Index />);
 

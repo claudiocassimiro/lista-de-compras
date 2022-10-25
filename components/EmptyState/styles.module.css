@@ -1,0 +1,24 @@
+.emptyStateContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.emptyStateContainerImage {
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+}
+
+.emptyStateText {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  width: 25rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}

@@ -4,9 +4,12 @@ const withPWA = require('next-pwa')({
   skipWaiting: true,
 });
 
-const nextConfig = withPWA({
+const nextConfig = {
+  images: {
+    domains: ['localhost'],
+  },
   reactStrictMode: true,
   swcMinify: true,
-});
+};
 
-module.exports = nextConfig;
+module.exports = withPWA(nextConfig);
