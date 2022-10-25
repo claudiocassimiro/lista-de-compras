@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styles from '../styles/Home.module.css';
 import AddProductModal from '../components/AddProductModal';
 import BackToTheListProductsButton from '../components/BackToTheListProductsButton';
@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import RenderProducts from '../components/RenderProducts';
 import SearchByProduct from '../components/SearchByProduct';
 import RenderFilteredProducts from '../components/RenderFilteredProducts';
+import Footer from '../components/Footer';
 
 export interface Product {
   productName: string;
@@ -59,12 +60,25 @@ const Home: NextPage = () => {
 
     setProducts(savedProducts);
   }, []);
+  const totalPrice = useMemo(() => {
+    const total = products.reduce(
+      (acc, current) => acc + Number(current.productPrice),
+      0,
+    );
+
+    const formatedTotal = total.toLocaleString(`pt-br`, {
+      style: `currency`,
+      currency: `BRL`,
+    });
+
+    return formatedTotal;
+  }, [products]);
 
   const handleFilteredProduct = (term: string) => {
     if (term === ``) {
       setRenderBackToListButton(false);
       setRenderSearchNotFound(false);
-      return setFilteredProducts(products);
+      return setFilteredProducts([]);
     }
 
     const serchedProduct = products?.filter((product) =>
@@ -120,6 +134,11 @@ const Home: NextPage = () => {
             />
           )}
         </div>
+        {products.length > 0 &&
+        filteredProducts?.length === 0 &&
+        !renderSearchNotFound ? (
+          <Footer totalProducts={products.length} totalPrice={totalPrice} />
+        ) : null}
       </div>
     </div>
   );
