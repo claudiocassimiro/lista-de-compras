@@ -135,7 +135,7 @@ const Home: NextPage = () => {
           )}
         </div>
         {products.length > 0 &&
-        filteredProducts?.length === 0 &&
+        filteredProducts.length === 0 &&
         !renderSearchNotFound ? (
           <Footer totalProducts={products.length} totalPrice={totalPrice} />
         ) : null}
