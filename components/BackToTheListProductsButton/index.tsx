@@ -5,20 +5,21 @@ import styles from './styles.module.css';
 export interface BackToTheListProductsButtonProps {
   setFilteredProduct: (product: Product[]) => void;
   setRenderBackToListButton: (value: boolean) => void;
-  filteredProduct: Product[] | undefined;
+  setRenderSearchNotFound: (value: boolean) => void;
 }
 
 export default function BackToTheListProductsButton({
   setFilteredProduct,
-  filteredProduct,
   setRenderBackToListButton,
+  setRenderSearchNotFound,
 }: BackToTheListProductsButtonProps) {
   const handleClick = () => {
     setRenderBackToListButton(false);
+    setRenderSearchNotFound(false);
     setFilteredProduct([]);
   };
 
-  return filteredProduct && filteredProduct.length > 0 ? (
+  return (
     <div className={styles.backToTheListProductsContainer}>
       <button
         data-testid="back-button"
@@ -32,5 +33,5 @@ export default function BackToTheListProductsButton({
         </span>
       </button>
     </div>
-  ) : null;
+  );
 }
