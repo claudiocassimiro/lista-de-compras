@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 
 export default function EmptyState() {
   return (
-    <div className={styles.emptyStateContainer}>
+    <div className={styles.emptyStateContainer} data-testid="empty-state">
       <div className={styles.emptyStateContainerImage}>
         <Image
           src="/images/empty-state-image.webp"
