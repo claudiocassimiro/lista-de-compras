@@ -10,7 +10,7 @@
   margin-left: -2rem;
 }
 
-.containerInfos {
+.footerContainerInfos {
   display: flex;
   justify-content: flex-start;
 }
@@ -23,7 +23,7 @@
   line-height: 1.6rem;
 }
 
-.divider {
+.footerDivider {
   margin: 0;
   height: 4rem;
 }

@@ -8,14 +8,14 @@ export interface FooterProps {
 export default function Footer({ totalProducts, totalPrice }: FooterProps) {
   return (
     <footer data-testid="footer" className={styles.footer}>
-      <div className={styles.containerInfos}>
+      <div className={styles.footerContainerInfos}>
         <p
           data-testid="total-products"
           className={styles.footerTotalOfProducts}
         >{`Total de produtos: ${totalProducts}`}</p>
       </div>
-      <hr className={styles.divider} />
-      <div className={styles.containerInfos}>
+      <hr className={styles.footerDivider} />
+      <div className={styles.footerContainerInfos}>
         <p
           data-testid="total-price"
           className={styles.footerTotalPrice}
