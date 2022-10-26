@@ -86,6 +86,20 @@ describe(`Index`, () => {
       expect(await screen.findByTestId(`close-button`)).toBeInTheDocument();
     });
 
+    test(`should have a element with testid "help-tags"`, async () => {
+      render(<Index />);
+
+      const openModalButton = screen.getByRole(`button`, {
+        name: `Adicionar um Produto`,
+      });
+
+      expect(openModalButton).toBeInTheDocument();
+
+      userEvent.click(openModalButton);
+
+      expect(await screen.findByTestId(`help-tags`)).toBeInTheDocument();
+    });
+
     test(`when the user click in button to open modal should have three inputs with placeholders "Nome do Produto", "Preço do Produto" and "Quantidade do Produto"`, async () => {
       render(<Index />);
 
