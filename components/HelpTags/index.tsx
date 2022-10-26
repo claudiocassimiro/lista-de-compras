@@ -10,7 +10,7 @@ export default function HelpTags({
   productOnList,
 }: HelpTagsProps) {
   return (
-    <div className={styles.helpTagsContainer}>
+    <div data-testid="help-tags" className={styles.helpTagsContainer}>
       {productOnList.map((product, index) =>
         index <= 8 ? (
           <button
