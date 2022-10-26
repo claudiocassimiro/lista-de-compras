@@ -1,0 +1,24 @@
+.helpTagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-height: 13rem;
+  padding: 2.5rem 2rem 0;
+  margin-bottom: 1rem;
+}
+
+.helpTagsTagButton {
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 0.1rem solid #7c7c7c;
+  border-radius: 0.4rem;
+  background-color: white;
+}
+
+.helpTagsProductName {
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.6rem;
+}
