@@ -5,6 +5,8 @@ import { useState, useEffect, useMemo } from 'react';
 import Input from '../Input';
 import styles from './styles.module.css';
 import { Product } from '../../pages';
+import HelpTags from '../HelpTags';
+import productsList from '../../static/productsList';
 
 export interface AddProductModalProps {
   handleProducts: (product: Product) => void;
@@ -14,6 +16,7 @@ export default function AddProductModal({
   handleProducts,
 }: AddProductModalProps) {
   const modal = useDialogState();
+  const [productOnList, setProductOnList] = useState(productsList);
   const [buttonDisabled, setButtonDisabled] = useState<boolean>();
   const [productName, setProductName] = useState(``);
   const [thisProductIsSellByWeight, setThisProductIsSellByWeight] =
@@ -70,6 +73,17 @@ export default function AddProductModal({
     [thisProductIsSellByWeight],
   );
 
+  const handleSelectTag = (productName: string, index: number) => {
+    setProductName(productName);
+
+    const removedProduct = productOnList[index];
+    const newProductList = productOnList.filter(
+      (_productName, productIndex) => productIndex !== index,
+    );
+
+    setProductOnList([...newProductList, removedProduct]);
+  };
+
   return (
     <>
       <DialogDisclosure
@@ -95,6 +109,11 @@ export default function AddProductModal({
               onClick={modal.hide}
             />
           </div>
+
+          <HelpTags
+            handleSelectTag={handleSelectTag}
+            productOnList={productOnList}
+          />
 
           <div className={styles.addProductModalContainerContent}>
             <div className={styles.addProductModalContainerInputs}>
