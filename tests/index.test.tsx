@@ -414,6 +414,399 @@ describe(`Index`, () => {
           `Total: R$ 14,00`,
         );
       });
+
+      test(`when the user save products, should have an button on footer with testId equal to "clearlist-button-open-modal-button"`, async () => {
+        render(<Index />);
+
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
+
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
+
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const products = await screen.findAllByTestId(`products`);
+
+        expect(products.length).toEqual(2);
+
+        products.forEach((product) => {
+          expect(product).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+        expect(
+          screen.getByTestId(`clearlist-button-open-modal-button`),
+        ).toBeInTheDocument();
+      });
+
+      test(`when the user save products, and clicks on button to clear list, should have an element with testId equal to "pop-up-to-clear-list"`, async () => {
+        render(<Index />);
+
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
+
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
+
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const products = await screen.findAllByTestId(`products`);
+
+        expect(products.length).toEqual(2);
+
+        products.forEach((product) => {
+          expect(product).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+        const clearListButton = screen.getByTestId(
+          `clearlist-button-open-modal-button`,
+        );
+
+        expect(clearListButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(clearListButton));
+
+        expect(screen.getByTestId(`pop-up-to-clear-list`)).toBeInTheDocument();
+      });
+
+      test(`when the user save products, and clicks on button to clear list, should have to buttons on pop-up with testIds equals "yes-button" and "no-button"`, async () => {
+        render(<Index />);
+
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
+
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
+
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const products = await screen.findAllByTestId(`products`);
+
+        expect(products.length).toEqual(2);
+
+        products.forEach((product) => {
+          expect(product).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+        const clearListButton = screen.getByTestId(
+          `clearlist-button-open-modal-button`,
+        );
+
+        expect(clearListButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(clearListButton));
+
+        expect(screen.getByTestId(`pop-up-to-clear-list`)).toBeInTheDocument();
+
+        expect(screen.getByTestId(`yes-button`)).toBeInTheDocument();
+
+        expect(screen.getByTestId(`no-button`)).toBeInTheDocument();
+      });
+
+      test(`when the user save products, and clicks on button to clear list, and clicks on "yes-button" the list should be cleaned`, async () => {
+        render(<Index />);
+
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
+
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
+
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const products = await screen.findAllByTestId(`products`);
+
+        expect(products.length).toEqual(2);
+
+        products.forEach((product) => {
+          expect(product).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+        const clearListButton = screen.getByTestId(
+          `clearlist-button-open-modal-button`,
+        );
+
+        expect(clearListButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(clearListButton));
+
+        expect(screen.getByTestId(`pop-up-to-clear-list`)).toBeInTheDocument();
+
+        const yesButton = screen.getByTestId(`yes-button`);
+
+        expect(yesButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(yesButton));
+
+        const listOfProducts = screen.queryAllByTestId(`products`);
+
+        expect(listOfProducts.length).toEqual(0);
+      });
+
+      test(`when the user save products, and clicks on button to clear list, and clicks on "no-button" the list should keeping the products`, async () => {
+        render(<Index />);
+
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
+
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
+
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const products = await screen.findAllByTestId(`products`);
+
+        expect(products.length).toEqual(2);
+
+        products.forEach((product) => {
+          expect(product).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+        const clearListButton = screen.getByTestId(
+          `clearlist-button-open-modal-button`,
+        );
+
+        expect(clearListButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(clearListButton));
+
+        expect(screen.getByTestId(`pop-up-to-clear-list`)).toBeInTheDocument();
+
+        const noButton = screen.getByTestId(`no-button`);
+
+        expect(noButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(noButton));
+
+        const listOfProducts = screen.queryAllByTestId(`products`);
+
+        expect(listOfProducts.length).toEqual(2);
+      });
     });
 
     describe(`search for a product behavior`, () => {
