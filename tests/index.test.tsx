@@ -20,13 +20,7 @@ describe(`Index`, () => {
       expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
     });
 
-    test(`if there is no product in the list, the empty state must be rendered`, () => {
-      render(<Index />);
-
-      expect(screen.getByTestId(`empty-state`)).toBeInTheDocument();
-    });
-
-    test(`if there is a product in the list, empty state should not be rendered`, async () => {
+    test(`when the user clicks to open modal, should have a element with testid "close-button"`, async () => {
       render(<Index />);
 
       const openModalButton = screen.getByRole(`button`, {
@@ -35,647 +29,1078 @@ describe(`Index`, () => {
 
       expect(openModalButton).toBeInTheDocument();
 
-      userEvent.click(openModalButton);
+      await waitFor(() => userEvent.click(openModalButton));
 
-      expect(
-        await screen.findByPlaceholderText(`Nome do Produto`),
-      ).toBeInTheDocument();
-
-      expect(
-        await screen.findByPlaceholderText(`Preço do Produto`),
-      ).toBeInTheDocument();
-
-      expect(
-        await screen.findByPlaceholderText(`Quantidade do Produto`),
-      ).toBeInTheDocument();
-
-      const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-      const priceProductInput = screen.getByPlaceholderText(`Preço do Produto`);
-      const quantityProductInput = screen.getByPlaceholderText(
-        `Quantidade do Produto`,
-      );
-
-      await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
-
-      await waitFor(() => userEvent.type(priceProductInput, `10`));
-
-      await waitFor(() => userEvent.type(quantityProductInput, `1`));
-
-      const addProductButton = screen.getByRole(`button`, {
-        name: `Adicionar`,
-      });
-
-      await waitFor(() => userEvent.click(addProductButton));
-
-      await waitFor(() => userEvent.click(screen.getByTestId(`close-button`)));
-
-      expect(screen.queryByTestId(`empty-state`)).not.toBeInTheDocument();
+      expect(screen.getByTestId(`close-button`)).toBeInTheDocument();
     });
 
-    test(`should have a element with testid "close-button"`, async () => {
-      render(<Index />);
+    describe(`empty state behavior`, () => {
+      test(`if there is no product in the list, the empty state must be rendered`, async () => {
+        render(<Index />);
 
-      const openModalButton = screen.getByRole(`button`, {
-        name: `Adicionar um Produto`,
+        expect(screen.getByTestId(`empty-state`)).toBeInTheDocument();
       });
 
-      expect(openModalButton).toBeInTheDocument();
+      test(`if there is a product in the list, empty state should not be rendered`, async () => {
+        render(<Index />);
 
-      userEvent.click(openModalButton);
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
 
-      expect(await screen.findByTestId(`close-button`)).toBeInTheDocument();
-    });
+        expect(openModalButton).toBeInTheDocument();
 
-    test(`should have a element with testid "help-tags"`, async () => {
-      render(<Index />);
+        await waitFor(() => userEvent.click(openModalButton));
 
-      const openModalButton = screen.getByRole(`button`, {
-        name: `Adicionar um Produto`,
-      });
-
-      expect(openModalButton).toBeInTheDocument();
-
-      userEvent.click(openModalButton);
-
-      expect(await screen.findByTestId(`help-tags`)).toBeInTheDocument();
-    });
-
-    test(`when the user click in button to open modal should have three inputs with placeholders "Nome do Produto", "Preço do Produto" and "Quantidade do Produto"`, async () => {
-      render(<Index />);
-
-      const openModalButton = screen.getByRole(`button`, {
-        name: `Adicionar um Produto`,
-      });
-
-      expect(openModalButton).toBeInTheDocument();
-
-      userEvent.click(openModalButton);
-
-      expect(
-        await screen.findByPlaceholderText(`Nome do Produto`),
-      ).toBeInTheDocument();
-
-      expect(
-        await screen.findByPlaceholderText(`Preço do Produto`),
-      ).toBeInTheDocument();
-
-      expect(
-        await screen.findByPlaceholderText(`Quantidade do Produto`),
-      ).toBeInTheDocument();
-    });
-
-    test(`the user should can add products to list`, async () => {
-      render(<Index />);
-
-      const openModalButton = screen.getByRole(`button`, {
-        name: `Adicionar um Produto`,
-      });
-
-      expect(openModalButton).toBeInTheDocument();
-
-      userEvent.click(openModalButton);
-
-      expect(
-        await screen.findByPlaceholderText(`Nome do Produto`),
-      ).toBeInTheDocument();
-
-      expect(
-        await screen.findByPlaceholderText(`Preço do Produto`),
-      ).toBeInTheDocument();
-
-      expect(
-        await screen.findByPlaceholderText(`Quantidade do Produto`),
-      ).toBeInTheDocument();
-
-      await waitFor(() =>
-        userEvent.type(
+        expect(
           screen.getByPlaceholderText(`Nome do Produto`),
-          `feijão puro`,
-        ),
-      );
+        ).toBeInTheDocument();
 
-      await waitFor(() =>
-        userEvent.type(screen.getByPlaceholderText(`Preço do Produto`), `10`),
-      );
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
 
-      await waitFor(() =>
-        userEvent.type(
+        expect(
           screen.getByPlaceholderText(`Quantidade do Produto`),
-          `1`,
-        ),
-      );
+        ).toBeInTheDocument();
 
-      const addProductButton = screen.getByRole(`button`, {
-        name: `Adicionar`,
-      });
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
 
-      expect(addProductButton).toBeInTheDocument();
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
-      await waitFor(() => userEvent.click(addProductButton));
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
 
-      expect(screen.getByPlaceholderText(`Nome do Produto`)).toHaveTextContent(
-        ``,
-      );
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
 
-      expect(screen.getByPlaceholderText(`Preço do Produto`)).toHaveTextContent(
-        ``,
-      );
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
 
-      expect(
-        screen.getByPlaceholderText(`Quantidade do Produto`),
-      ).toHaveTextContent(``);
-    });
+        await waitFor(() => userEvent.click(addProductButton));
 
-    test(`when the user save products, the products should render in the list`, async () => {
-      render(<Index />);
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
 
-      const openModalButton = screen.getByRole(`button`, {
-        name: `Adicionar um Produto`,
-      });
-
-      expect(openModalButton).toBeInTheDocument();
-
-      userEvent.click(openModalButton);
-
-      expect(
-        await screen.findByPlaceholderText(`Nome do Produto`),
-      ).toBeInTheDocument();
-
-      expect(
-        await screen.findByPlaceholderText(`Preço do Produto`),
-      ).toBeInTheDocument();
-
-      expect(
-        await screen.findByPlaceholderText(`Quantidade do Produto`),
-      ).toBeInTheDocument();
-
-      const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-      const priceProductInput = screen.getByPlaceholderText(`Preço do Produto`);
-      const quantityProductInput = screen.getByPlaceholderText(
-        `Quantidade do Produto`,
-      );
-
-      await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
-
-      await waitFor(() => userEvent.type(priceProductInput, `10`));
-
-      await waitFor(() => userEvent.type(quantityProductInput, `1`));
-
-      const addProductButton = screen.getByRole(`button`, {
-        name: `Adicionar`,
-      });
-
-      await waitFor(() => userEvent.click(addProductButton));
-
-      await waitFor(() => userEvent.type(nameProductInput, `arroz`));
-
-      await waitFor(() => userEvent.type(priceProductInput, `7`));
-
-      await waitFor(() => userEvent.type(quantityProductInput, `2`));
-
-      await waitFor(() => userEvent.click(addProductButton));
-
-      await waitFor(() => userEvent.click(screen.getByTestId(`close-button`)));
-
-      const products = await screen.findAllByTestId(`products`);
-
-      expect(products.length).toEqual(2);
-
-      products.forEach((product) => {
-        expect(product).toBeInTheDocument();
+        expect(screen.queryByTestId(`empty-state`)).not.toBeInTheDocument();
       });
     });
 
-    test(`when the user save products, the footer with total of products and total price should be in the document`, async () => {
-      render(<Index />);
+    describe(`helpTags`, () => {
+      test(`should have a element with testid "help-tags"`, async () => {
+        render(<Index />);
 
-      const openModalButton = screen.getByRole(`button`, {
-        name: `Adicionar um Produto`,
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(await screen.findByTestId(`help-tags`)).toBeInTheDocument();
       });
-
-      expect(openModalButton).toBeInTheDocument();
-
-      userEvent.click(openModalButton);
-
-      expect(
-        await screen.findByPlaceholderText(`Nome do Produto`),
-      ).toBeInTheDocument();
-
-      expect(
-        await screen.findByPlaceholderText(`Preço do Produto`),
-      ).toBeInTheDocument();
-
-      expect(
-        await screen.findByPlaceholderText(`Quantidade do Produto`),
-      ).toBeInTheDocument();
-
-      const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-      const priceProductInput = screen.getByPlaceholderText(`Preço do Produto`);
-      const quantityProductInput = screen.getByPlaceholderText(
-        `Quantidade do Produto`,
-      );
-
-      await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
-
-      await waitFor(() => userEvent.type(priceProductInput, `10`));
-
-      await waitFor(() => userEvent.type(quantityProductInput, `1`));
-
-      const addProductButton = screen.getByRole(`button`, {
-        name: `Adicionar`,
-      });
-
-      await waitFor(() => userEvent.click(addProductButton));
-
-      await waitFor(() => userEvent.type(nameProductInput, `arroz`));
-
-      await waitFor(() => userEvent.type(priceProductInput, `7`));
-
-      await waitFor(() => userEvent.type(quantityProductInput, `2`));
-
-      await waitFor(() => userEvent.click(addProductButton));
-
-      await waitFor(() => userEvent.click(screen.getByTestId(`close-button`)));
-
-      const products = await screen.findAllByTestId(`products`);
-
-      expect(products.length).toEqual(2);
-
-      products.forEach((product) => {
-        expect(product).toBeInTheDocument();
-      });
-
-      expect(screen.getByTestId(`footer`)).toBeInTheDocument();
-
-      expect(screen.getByTestId(`total-products`)).toHaveTextContent(
-        `Total de produtos: 2`,
-      );
-
-      expect(screen.getByTestId(`total-price`)).toHaveTextContent(
-        `Total: R$ 24,00`,
-      );
     });
 
-    test(`when the user save products, and after remove a product, the values in footer should be updated`, async () => {
-      render(<Index />);
+    describe(`save products behavior`, () => {
+      test(`when the user click in button to open modal should have three inputs with placeholders "Nome do Produto", "Preço do Produto" and "Quantidade do Produto"`, async () => {
+        render(<Index />);
 
-      const openModalButton = screen.getByRole(`button`, {
-        name: `Adicionar um Produto`,
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
       });
 
-      expect(openModalButton).toBeInTheDocument();
+      test(`the user should can add products to list`, async () => {
+        render(<Index />);
 
-      userEvent.click(openModalButton);
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
 
-      expect(
-        await screen.findByPlaceholderText(`Nome do Produto`),
-      ).toBeInTheDocument();
+        expect(openModalButton).toBeInTheDocument();
 
-      expect(
-        await screen.findByPlaceholderText(`Preço do Produto`),
-      ).toBeInTheDocument();
+        await waitFor(() => userEvent.click(openModalButton));
 
-      expect(
-        await screen.findByPlaceholderText(`Quantidade do Produto`),
-      ).toBeInTheDocument();
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
 
-      const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-      const priceProductInput = screen.getByPlaceholderText(`Preço do Produto`);
-      const quantityProductInput = screen.getByPlaceholderText(
-        `Quantidade do Produto`,
-      );
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
 
-      await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
 
-      await waitFor(() => userEvent.type(priceProductInput, `10`));
+        await waitFor(() =>
+          userEvent.type(
+            screen.getByPlaceholderText(`Nome do Produto`),
+            `feijão puro`,
+          ),
+        );
 
-      await waitFor(() => userEvent.type(quantityProductInput, `1`));
+        await waitFor(() =>
+          userEvent.type(screen.getByPlaceholderText(`Preço do Produto`), `10`),
+        );
 
-      const addProductButton = screen.getByRole(`button`, {
-        name: `Adicionar`,
+        await waitFor(() =>
+          userEvent.type(
+            screen.getByPlaceholderText(`Quantidade do Produto`),
+            `1`,
+          ),
+        );
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        expect(addProductButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toHaveTextContent(``);
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toHaveTextContent(``);
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toHaveTextContent(``);
       });
 
-      await waitFor(() => userEvent.click(addProductButton));
+      test(`when the user save products, the products should render in the list`, async () => {
+        render(<Index />);
 
-      await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
 
-      await waitFor(() => userEvent.type(priceProductInput, `7`));
+        expect(openModalButton).toBeInTheDocument();
 
-      await waitFor(() => userEvent.type(quantityProductInput, `2`));
+        await waitFor(() => userEvent.click(openModalButton));
 
-      await waitFor(() => userEvent.click(addProductButton));
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
 
-      await waitFor(() => userEvent.click(screen.getByTestId(`close-button`)));
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
 
-      const products = await screen.findAllByTestId(`products`);
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
 
-      expect(products.length).toEqual(2);
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
 
-      products.forEach((product) => {
-        expect(product).toBeInTheDocument();
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const products = await screen.findAllByTestId(`products`);
+
+        expect(products.length).toEqual(2);
+
+        products.forEach((product) => {
+          expect(product).toBeInTheDocument();
+        });
       });
 
-      expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+      test(`when the user save products, the footer with total of products and total price should be in the document`, async () => {
+        render(<Index />);
 
-      expect(screen.getByTestId(`total-products`)).toHaveTextContent(
-        `Total de produtos: 2`,
-      );
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
 
-      expect(screen.getByTestId(`total-price`)).toHaveTextContent(
-        `Total: R$ 24,00`,
-      );
+        expect(openModalButton).toBeInTheDocument();
 
-      await waitFor(() =>
-        userEvent.click(screen.getAllByTestId(`delete-product`)[0]),
-      );
+        await waitFor(() => userEvent.click(openModalButton));
 
-      expect(await screen.findByTestId(`total-products`)).toHaveTextContent(
-        `Total de produtos: 1`,
-      );
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
 
-      expect(await screen.findByTestId(`total-price`)).toHaveTextContent(
-        `Total: R$ 14,00`,
-      );
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
+
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
+
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const products = await screen.findAllByTestId(`products`);
+
+        expect(products.length).toEqual(2);
+
+        products.forEach((product) => {
+          expect(product).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+        expect(screen.getByTestId(`total-products`)).toHaveTextContent(
+          `Total de produtos: 2`,
+        );
+
+        expect(screen.getByTestId(`total-price`)).toHaveTextContent(
+          `Total: R$ 24,00`,
+        );
+      });
+
+      test(`when the user save products, and after remove a product, the values in footer should be updated`, async () => {
+        render(<Index />);
+
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
+
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
+
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const products = await screen.findAllByTestId(`products`);
+
+        expect(products.length).toEqual(2);
+
+        products.forEach((product) => {
+          expect(product).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+        expect(screen.getByTestId(`total-products`)).toHaveTextContent(
+          `Total de produtos: 2`,
+        );
+
+        expect(screen.getByTestId(`total-price`)).toHaveTextContent(
+          `Total: R$ 24,00`,
+        );
+
+        await waitFor(() =>
+          userEvent.click(screen.getAllByTestId(`delete-product`)[0]),
+        );
+
+        expect(screen.getByTestId(`total-products`)).toHaveTextContent(
+          `Total de produtos: 1`,
+        );
+
+        expect(screen.getByTestId(`total-price`)).toHaveTextContent(
+          `Total: R$ 14,00`,
+        );
+      });
+
+      test(`when the user save products, should have an button on footer with testId equal to "clearlist-button-open-modal-button"`, async () => {
+        render(<Index />);
+
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
+
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
+
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const products = await screen.findAllByTestId(`products`);
+
+        expect(products.length).toEqual(2);
+
+        products.forEach((product) => {
+          expect(product).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+        expect(
+          screen.getByTestId(`clearlist-button-open-modal-button`),
+        ).toBeInTheDocument();
+      });
+
+      test(`when the user save products, and clicks on button to clear list, should have an element with testId equal to "pop-up-to-clear-list"`, async () => {
+        render(<Index />);
+
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
+
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
+
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const products = await screen.findAllByTestId(`products`);
+
+        expect(products.length).toEqual(2);
+
+        products.forEach((product) => {
+          expect(product).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+        const clearListButton = screen.getByTestId(
+          `clearlist-button-open-modal-button`,
+        );
+
+        expect(clearListButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(clearListButton));
+
+        expect(screen.getByTestId(`pop-up-to-clear-list`)).toBeInTheDocument();
+      });
+
+      test(`when the user save products, and clicks on button to clear list, should have to buttons on pop-up with testIds equals "yes-button" and "no-button"`, async () => {
+        render(<Index />);
+
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
+
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
+
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const products = await screen.findAllByTestId(`products`);
+
+        expect(products.length).toEqual(2);
+
+        products.forEach((product) => {
+          expect(product).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+        const clearListButton = screen.getByTestId(
+          `clearlist-button-open-modal-button`,
+        );
+
+        expect(clearListButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(clearListButton));
+
+        expect(screen.getByTestId(`pop-up-to-clear-list`)).toBeInTheDocument();
+
+        expect(screen.getByTestId(`yes-button`)).toBeInTheDocument();
+
+        expect(screen.getByTestId(`no-button`)).toBeInTheDocument();
+      });
+
+      test(`when the user save products, and clicks on button to clear list, and clicks on "yes-button" the list should be cleaned`, async () => {
+        render(<Index />);
+
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
+
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
+
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const products = await screen.findAllByTestId(`products`);
+
+        expect(products.length).toEqual(2);
+
+        products.forEach((product) => {
+          expect(product).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+        const clearListButton = screen.getByTestId(
+          `clearlist-button-open-modal-button`,
+        );
+
+        expect(clearListButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(clearListButton));
+
+        expect(screen.getByTestId(`pop-up-to-clear-list`)).toBeInTheDocument();
+
+        const yesButton = screen.getByTestId(`yes-button`);
+
+        expect(yesButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(yesButton));
+
+        const listOfProducts = screen.queryAllByTestId(`products`);
+
+        expect(listOfProducts.length).toEqual(0);
+      });
+
+      test(`when the user save products, and clicks on button to clear list, and clicks on "no-button" the list should keeping the products`, async () => {
+        render(<Index />);
+
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
+
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
+
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const products = await screen.findAllByTestId(`products`);
+
+        expect(products.length).toEqual(2);
+
+        products.forEach((product) => {
+          expect(product).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId(`footer`)).toBeInTheDocument();
+
+        const clearListButton = screen.getByTestId(
+          `clearlist-button-open-modal-button`,
+        );
+
+        expect(clearListButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(clearListButton));
+
+        expect(screen.getByTestId(`pop-up-to-clear-list`)).toBeInTheDocument();
+
+        const noButton = screen.getByTestId(`no-button`);
+
+        expect(noButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(noButton));
+
+        const listOfProducts = screen.queryAllByTestId(`products`);
+
+        expect(listOfProducts.length).toEqual(2);
+      });
     });
 
-    test(`with products in list, if the user search by product should return only the serched product`, async () => {
-      render(<Index />);
+    describe(`search for a product behavior`, () => {
+      test(`with products in list, if the user search by product should return only the serched product`, async () => {
+        render(<Index />);
 
-      expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
+        expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
 
-      userEvent.click(
-        screen.getByRole(`button`, { name: `Adicionar um Produto` }),
-      );
+        userEvent.click(
+          screen.getByRole(`button`, { name: `Adicionar um Produto` }),
+        );
 
-      expect(
-        await screen.findByPlaceholderText(`Nome do Produto`),
-      ).toBeInTheDocument();
+        expect(
+          await screen.findByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
 
-      expect(
-        await screen.findByPlaceholderText(`Preço do Produto`),
-      ).toBeInTheDocument();
+        expect(
+          await screen.findByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
 
-      expect(
-        await screen.findByPlaceholderText(`Quantidade do Produto`),
-      ).toBeInTheDocument();
+        expect(
+          await screen.findByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
 
-      const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-      const priceProductInput = screen.getByPlaceholderText(`Preço do Produto`);
-      const quantityProductInput = screen.getByPlaceholderText(
-        `Quantidade do Produto`,
-      );
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
 
-      await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
-      await waitFor(() => userEvent.type(priceProductInput, `10`));
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
 
-      await waitFor(() => userEvent.type(quantityProductInput, `1`));
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
 
-      const addProductButton = screen.getByRole(`button`, {
-        name: `Adicionar`,
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        const searchInput = screen.getByPlaceholderText(
+          `Pesquise um produto na lista`,
+        );
+
+        expect(searchInput).toBeInTheDocument();
+
+        await waitFor(() => userEvent.type(searchInput, `feijão puro`));
+
+        expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+
+        expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
       });
 
-      await waitFor(() => userEvent.click(addProductButton));
+      test(`after searching for a product, the user can use back-button to back to the original list of products`, async () => {
+        render(<Index />);
 
-      await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+        expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
 
-      await waitFor(() => userEvent.type(priceProductInput, `7`));
+        userEvent.click(
+          screen.getByRole(`button`, { name: `Adicionar um Produto` }),
+        );
 
-      await waitFor(() => userEvent.type(quantityProductInput, `2`));
+        expect(
+          await screen.findByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
 
-      await waitFor(() => userEvent.click(addProductButton));
+        expect(
+          await screen.findByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
 
-      await waitFor(() => userEvent.click(screen.getByTestId(`close-button`)));
+        expect(
+          await screen.findByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
 
-      const searchInput = screen.getByPlaceholderText(
-        `Pesquise um produto na lista`,
-      );
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
 
-      expect(searchInput).toBeInTheDocument();
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
-      await waitFor(() => userEvent.type(searchInput, `feijão puro`));
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
 
-      expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
 
-      expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
-    });
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
 
-    test(`after searching for a product, the user can use back-button to back to the original list of products`, async () => {
-      render(<Index />);
+        await waitFor(() => userEvent.click(addProductButton));
 
-      expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
 
-      userEvent.click(
-        screen.getByRole(`button`, { name: `Adicionar um Produto` }),
-      );
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
 
-      expect(
-        await screen.findByPlaceholderText(`Nome do Produto`),
-      ).toBeInTheDocument();
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
 
-      expect(
-        await screen.findByPlaceholderText(`Preço do Produto`),
-      ).toBeInTheDocument();
+        await waitFor(() => userEvent.click(addProductButton));
 
-      expect(
-        await screen.findByPlaceholderText(`Quantidade do Produto`),
-      ).toBeInTheDocument();
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
 
-      const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-      const priceProductInput = screen.getByPlaceholderText(`Preço do Produto`);
-      const quantityProductInput = screen.getByPlaceholderText(
-        `Quantidade do Produto`,
-      );
+        const searchInput = screen.getByPlaceholderText(
+          `Pesquise um produto na lista`,
+        );
 
-      await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+        expect(searchInput).toBeInTheDocument();
 
-      await waitFor(() => userEvent.type(priceProductInput, `10`));
+        await waitFor(() => userEvent.type(searchInput, `feijão puro`));
 
-      await waitFor(() => userEvent.type(quantityProductInput, `1`));
+        expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
 
-      const addProductButton = screen.getByRole(`button`, {
-        name: `Adicionar`,
+        expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
+
+        const backButton = screen.getByTestId(`back-button`);
+
+        expect(backButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(backButton));
+
+        expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+
+        expect(screen.getByText(`arroz`)).toBeInTheDocument();
       });
 
-      await waitFor(() => userEvent.click(addProductButton));
+      test(`after searching for a product, and the user use back-button to back to the original list of products the search input should be empty`, async () => {
+        render(<Index />);
 
-      await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+        expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
 
-      await waitFor(() => userEvent.type(priceProductInput, `7`));
+        userEvent.click(
+          screen.getByRole(`button`, { name: `Adicionar um Produto` }),
+        );
 
-      await waitFor(() => userEvent.type(quantityProductInput, `2`));
+        expect(
+          await screen.findByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
 
-      await waitFor(() => userEvent.click(addProductButton));
+        expect(
+          await screen.findByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
 
-      await waitFor(() => userEvent.click(screen.getByTestId(`close-button`)));
+        expect(
+          await screen.findByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
 
-      const searchInput = screen.getByPlaceholderText(
-        `Pesquise um produto na lista`,
-      );
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
 
-      expect(searchInput).toBeInTheDocument();
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
-      await waitFor(() => userEvent.type(searchInput, `feijão puro`));
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
 
-      expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
 
-      expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
 
-      const backButton = screen.getByTestId(`back-button`);
+        await waitFor(() => userEvent.click(addProductButton));
 
-      expect(backButton).toBeInTheDocument();
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
 
-      await waitFor(() => userEvent.click(backButton));
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
 
-      expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
 
-      expect(screen.getByText(`arroz`)).toBeInTheDocument();
-    });
+        await waitFor(() => userEvent.click(addProductButton));
 
-    test(`after searching for a product, and the user use back-button to back to the original list of products the search input should be empty`, async () => {
-      render(<Index />);
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
 
-      expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
+        const searchInput = screen.getByPlaceholderText(
+          `Pesquise um produto na lista`,
+        );
 
-      userEvent.click(
-        screen.getByRole(`button`, { name: `Adicionar um Produto` }),
-      );
+        expect(searchInput).toBeInTheDocument();
 
-      expect(
-        await screen.findByPlaceholderText(`Nome do Produto`),
-      ).toBeInTheDocument();
+        await waitFor(() => userEvent.type(searchInput, `feijão puro`));
 
-      expect(
-        await screen.findByPlaceholderText(`Preço do Produto`),
-      ).toBeInTheDocument();
+        expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
 
-      expect(
-        await screen.findByPlaceholderText(`Quantidade do Produto`),
-      ).toBeInTheDocument();
+        expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
 
-      const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-      const priceProductInput = screen.getByPlaceholderText(`Preço do Produto`);
-      const quantityProductInput = screen.getByPlaceholderText(
-        `Quantidade do Produto`,
-      );
+        const backButton = screen.getByTestId(`back-button`);
 
-      await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+        expect(backButton).toBeInTheDocument();
 
-      await waitFor(() => userEvent.type(priceProductInput, `10`));
+        await waitFor(() => userEvent.click(backButton));
 
-      await waitFor(() => userEvent.type(quantityProductInput, `1`));
+        expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
 
-      const addProductButton = screen.getByRole(`button`, {
-        name: `Adicionar`,
+        expect(screen.getByText(`arroz`)).toBeInTheDocument();
+
+        expect(searchInput).toHaveTextContent(``);
       });
 
-      await waitFor(() => userEvent.click(addProductButton));
+      test(`after searching for a product, the user can delete a specific product in the filtered list`, async () => {
+        render(<Index />);
 
-      await waitFor(() => userEvent.type(nameProductInput, `arroz`));
+        expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
 
-      await waitFor(() => userEvent.type(priceProductInput, `7`));
+        userEvent.click(
+          screen.getByRole(`button`, { name: `Adicionar um Produto` }),
+        );
 
-      await waitFor(() => userEvent.type(quantityProductInput, `2`));
+        expect(
+          await screen.findByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
 
-      await waitFor(() => userEvent.click(addProductButton));
+        expect(
+          await screen.findByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
 
-      await waitFor(() => userEvent.click(screen.getByTestId(`close-button`)));
+        expect(
+          await screen.findByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
 
-      const searchInput = screen.getByPlaceholderText(
-        `Pesquise um produto na lista`,
-      );
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
 
-      expect(searchInput).toBeInTheDocument();
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
-      await waitFor(() => userEvent.type(searchInput, `feijão puro`));
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
 
-      expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
 
-      expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
 
-      const backButton = screen.getByTestId(`back-button`);
+        await waitFor(() => userEvent.click(addProductButton));
 
-      expect(backButton).toBeInTheDocument();
+        await waitFor(() => userEvent.type(nameProductInput, `arroz`));
 
-      await waitFor(() => userEvent.click(backButton));
+        await waitFor(() => userEvent.type(priceProductInput, `7`));
 
-      expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+        await waitFor(() => userEvent.type(quantityProductInput, `2`));
 
-      expect(screen.getByText(`arroz`)).toBeInTheDocument();
+        await waitFor(() => userEvent.click(addProductButton));
 
-      expect(searchInput).toHaveTextContent(``);
-    });
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
 
-    test(`after searching for a product, the user can delete a specific product in the filtered list`, async () => {
-      render(<Index />);
+        const searchInput = screen.getByPlaceholderText(
+          `Pesquise um produto na lista`,
+        );
 
-      expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
+        expect(searchInput).toBeInTheDocument();
 
-      userEvent.click(
-        screen.getByRole(`button`, { name: `Adicionar um Produto` }),
-      );
+        await waitFor(() => userEvent.type(searchInput, `feijão puro`));
 
-      expect(
-        await screen.findByPlaceholderText(`Nome do Produto`),
-      ).toBeInTheDocument();
+        expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
 
-      expect(
-        await screen.findByPlaceholderText(`Preço do Produto`),
-      ).toBeInTheDocument();
+        expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
 
-      expect(
-        await screen.findByPlaceholderText(`Quantidade do Produto`),
-      ).toBeInTheDocument();
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`delete-product`)),
+        );
 
-      const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-      const priceProductInput = screen.getByPlaceholderText(`Preço do Produto`);
-      const quantityProductInput = screen.getByPlaceholderText(
-        `Quantidade do Produto`,
-      );
+        expect(screen.getByText(`arroz`)).toBeInTheDocument();
 
-      await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+        expect(screen.queryByText(`feijão puro`)).not.toBeInTheDocument();
 
-      await waitFor(() => userEvent.type(priceProductInput, `10`));
-
-      await waitFor(() => userEvent.type(quantityProductInput, `1`));
-
-      const addProductButton = screen.getByRole(`button`, {
-        name: `Adicionar`,
+        expect(searchInput).toHaveTextContent(``);
       });
-
-      await waitFor(() => userEvent.click(addProductButton));
-
-      await waitFor(() => userEvent.type(nameProductInput, `arroz`));
-
-      await waitFor(() => userEvent.type(priceProductInput, `7`));
-
-      await waitFor(() => userEvent.type(quantityProductInput, `2`));
-
-      await waitFor(() => userEvent.click(addProductButton));
-
-      await waitFor(() => userEvent.click(screen.getByTestId(`close-button`)));
-
-      const searchInput = screen.getByPlaceholderText(
-        `Pesquise um produto na lista`,
-      );
-
-      expect(searchInput).toBeInTheDocument();
-
-      await waitFor(() => userEvent.type(searchInput, `feijão puro`));
-
-      expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
-
-      expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
-
-      await waitFor(() =>
-        userEvent.click(screen.getByTestId(`delete-product`)),
-      );
-
-      expect(screen.getByText(`arroz`)).toBeInTheDocument();
-
-      expect(screen.queryByText(`feijão puro`)).not.toBeInTheDocument();
-
-      expect(searchInput).toHaveTextContent(``);
     });
   });
 });

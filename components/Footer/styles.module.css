@@ -14,6 +14,7 @@
 
 .footerContainerInfos {
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
 }
 
@@ -23,9 +24,5 @@
   font-weight: 500;
   letter-spacing: -0.03rem;
   line-height: 1.6rem;
-}
-
-.footerDivider {
   margin: 0;
-  height: 4rem;
 }

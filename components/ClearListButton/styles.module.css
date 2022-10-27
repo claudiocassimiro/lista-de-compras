@@ -1,0 +1,53 @@
+.clearListButtonOpenModalButton {
+  width: 15rem;
+  height: 3.5rem;
+  border-radius: 0.8rem;
+  outline: none;
+}
+
+.clearListButtonTextButton {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.clearListButtonContainerPopUp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.clearListButtonPopUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 60vw;
+  height: 20vh;
+  background-color: white;
+  border: 0.1rem solid #7c7c7c;
+  border-radius: 0.8rem;
+}
+
+.clearListButtonText {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #fb4141;
+  margin: 0;
+}
+
+.clearListButtonContainerButtons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.clearListButton {
+  width: 6rem;
+  height: 3.5rem;
+  border-radius: 0.4rem;
+  outline: none;
+}
