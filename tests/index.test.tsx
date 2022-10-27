@@ -322,7 +322,7 @@ describe(`Index`, () => {
         expect(screen.getByTestId(`footer`)).toBeInTheDocument();
 
         expect(screen.getByTestId(`total-products`)).toHaveTextContent(
-          `Total de produtos: 2`,
+          `Total de produtos: 3`,
         );
 
         expect(screen.getByTestId(`total-price`)).toHaveTextContent(
@@ -395,7 +395,7 @@ describe(`Index`, () => {
         expect(screen.getByTestId(`footer`)).toBeInTheDocument();
 
         expect(screen.getByTestId(`total-products`)).toHaveTextContent(
-          `Total de produtos: 2`,
+          `Total de produtos: 3`,
         );
 
         expect(screen.getByTestId(`total-price`)).toHaveTextContent(
@@ -407,7 +407,7 @@ describe(`Index`, () => {
         );
 
         expect(screen.getByTestId(`total-products`)).toHaveTextContent(
-          `Total de produtos: 1`,
+          `Total de produtos: 2`,
         );
 
         expect(screen.getByTestId(`total-price`)).toHaveTextContent(
