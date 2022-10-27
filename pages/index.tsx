@@ -60,6 +60,7 @@ const Home: NextPage = () => {
 
     setProducts(savedProducts);
   }, []);
+
   const totalPrice = useMemo(() => {
     const total = products.reduce(
       (acc, current) => acc + Number(current.productPrice),
@@ -138,7 +139,11 @@ const Home: NextPage = () => {
       {products.length > 0 &&
       filteredProducts.length === 0 &&
       !renderSearchNotFound ? (
-        <Footer totalProducts={products.length} totalPrice={totalPrice} />
+        <Footer
+          totalProducts={products.length}
+          totalPrice={totalPrice}
+          setProducts={setProducts}
+        />
       ) : null}
     </div>
   );
