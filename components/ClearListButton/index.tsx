@@ -17,6 +17,7 @@ export default function ClearListButton({ setProducts }: ClearListButtonProps) {
   return (
     <>
       <DialogDisclosure
+        data-testid="clearlist-button-open-modal-button"
         className={styles.clearListButtonOpenModalButton}
         {...modal}
       >
@@ -24,6 +25,7 @@ export default function ClearListButton({ setProducts }: ClearListButtonProps) {
       </DialogDisclosure>
       {modal.visible ? (
         <Dialog
+          data-testid="pop-up-to-clear-list"
           aria-label="Você deseja limpar a lista?"
           {...modal}
           className={styles.clearListButtonContainerPopUp}
@@ -35,6 +37,7 @@ export default function ClearListButton({ setProducts }: ClearListButtonProps) {
 
             <div className={styles.clearListButtonContainerButtons}>
               <button
+                data-testid="yes-button"
                 className={styles.clearListButton}
                 type="button"
                 onClick={handleClearList}
@@ -43,6 +46,7 @@ export default function ClearListButton({ setProducts }: ClearListButtonProps) {
               </button>
 
               <button
+                data-testid="no-button"
                 className={styles.clearListButton}
                 type="button"
                 onClick={modal.hide}
