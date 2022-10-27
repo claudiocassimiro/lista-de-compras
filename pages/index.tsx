@@ -53,6 +53,16 @@ const Home: NextPage = () => {
     localStorage.setItem(`products`, JSON.stringify(newProducts as Product[]));
   };
 
+  const quantityOfProducts = useMemo(() => {
+    const totalCount = products.reduce(
+      (initialValue, currentValue) =>
+        initialValue + Number(currentValue.productQuantity),
+      0,
+    );
+
+    return totalCount;
+  }, [products]);
+
   useEffect(() => {
     const savedProducts = JSON.parse(
       localStorage.getItem(`products`) || `[]`,
@@ -140,7 +150,7 @@ const Home: NextPage = () => {
       filteredProducts.length === 0 &&
       !renderSearchNotFound ? (
         <Footer
-          totalProducts={products.length}
+          totalProducts={quantityOfProducts}
           totalPrice={totalPrice}
           setProducts={setProducts}
         />
