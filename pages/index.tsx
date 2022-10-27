@@ -150,7 +150,7 @@ const Home: NextPage = () => {
       filteredProducts.length === 0 &&
       !renderSearchNotFound ? (
         <Footer
-          totalProducts={products.length}
+          totalProducts={quantityOfProducts}
           totalPrice={totalPrice}
           setProducts={setProducts}
         />
