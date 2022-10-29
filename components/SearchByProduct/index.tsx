@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getSearchedProduct } from '../../store/searchProductsSlice';
 import Input from '../Input';
 import styles from './styles.module.css';
 
@@ -12,9 +14,11 @@ export default function SearchByProduct({
   renderBackToListButton,
 }: SearchByProductProps) {
   const [searchedProduct, setSearchedProduct] = useState(``);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     handleFilteredProduct(searchedProduct);
+    dispatch(getSearchedProduct(searchedProduct));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchedProduct]);
 
