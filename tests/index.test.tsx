@@ -811,7 +811,25 @@ describe(`Index`, () => {
     });
 
     describe(`search for a product behavior`, () => {
-      test(`with products in list, if the user search by product should return only the serched product`, async () => {
+      test(`without products in list, if the user search by a product, should return NotFound component`, async () => {
+        renderWithRedux(<Index />);
+
+        const searchInput = screen.getByPlaceholderText(
+          `Pesquise um produto na lista`,
+        );
+
+        expect(searchInput).toBeInTheDocument();
+
+        await waitFor(() => userEvent.type(searchInput, `feijão puro`));
+
+        expect(screen.getByTestId(`not-found-component`)).toBeInTheDocument();
+
+        expect(
+          screen.queryByText(`Este item ainda não está em sua lista`),
+        ).toBeInTheDocument();
+      });
+
+      test(`with products in list, if the user search by a product, should return only the serched product`, async () => {
         renderWithRedux(<Index />);
 
         expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
