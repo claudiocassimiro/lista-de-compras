@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '.';
 
 export interface SearchProductState {
   value: string;
@@ -14,11 +15,14 @@ export const searchProductSlice = createSlice({
   reducers: {
     getSearchedProduct: (state, { payload }) => ({
       ...state,
-      value: payload,
+      value: payload.charAt(0).toUpperCase() + payload.slice(1),
     }),
   },
 });
 
 export const { getSearchedProduct } = searchProductSlice.actions;
+
+export const selectSearchedProduct = (state: RootState) =>
+  state.searchedProduct.value;
 
 export default searchProductSlice.reducer;
