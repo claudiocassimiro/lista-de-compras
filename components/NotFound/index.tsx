@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 
 export default function NotFound() {
   return (
-    <div className={styles.notFoundContainer}>
+    <div data-testid="not-found-component" className={styles.notFoundContainer}>
       <div className={styles.notFoundContainerImage}>
         <Image
           src="/images/sad-face.webp"
@@ -12,7 +12,7 @@ export default function NotFound() {
         />
       </div>
       <p className={styles.notFoundText}>
-        Este item ainda não está na sua lista
+        Este item ainda não está em sua lista
       </p>
     </div>
   );
