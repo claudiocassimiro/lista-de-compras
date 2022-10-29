@@ -7,7 +7,7 @@ export default function EmptyState() {
       <div className={styles.emptyStateContainerImage}>
         <Image
           src="/images/empty-state-image.webp"
-          alt="Picture of the author"
+          alt="nave abduzindo um carrinho de compras"
           layout="fill"
         />
       </div>
