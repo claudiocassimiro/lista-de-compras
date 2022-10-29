@@ -1,6 +1,7 @@
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Index from '../pages';
+import { renderWithRedux } from '../utils/utilsTests';
 
 describe(`Index`, () => {
   afterAll(() => {
@@ -15,13 +16,13 @@ describe(`Index`, () => {
 
   describe(`Test of user behavior`, () => {
     test(`the button to open modal of add product should be in the document`, () => {
-      render(<Index />);
+      renderWithRedux(<Index />);
 
       expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
     });
 
     test(`when the user clicks to open modal, should have a element with testid "close-button"`, async () => {
-      render(<Index />);
+      renderWithRedux(<Index />);
 
       const openModalButton = screen.getByRole(`button`, {
         name: `Adicionar um Produto`,
@@ -35,14 +36,14 @@ describe(`Index`, () => {
     });
 
     describe(`empty state behavior`, () => {
-      test(`if there is no product in the list, the empty state must be rendered`, async () => {
-        render(<Index />);
+      test(`if there is no product in the list, the empty state must be renderWithReduxed`, async () => {
+        renderWithRedux(<Index />);
 
         expect(screen.getByTestId(`empty-state`)).toBeInTheDocument();
       });
 
-      test(`if there is a product in the list, empty state should not be rendered`, async () => {
-        render(<Index />);
+      test(`if there is a product in the list, empty state should not be renderWithReduxed`, async () => {
+        renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
           name: `Adicionar um Produto`,
@@ -93,7 +94,7 @@ describe(`Index`, () => {
 
     describe(`helpTags`, () => {
       test(`should have a element with testid "help-tags"`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
           name: `Adicionar um Produto`,
@@ -109,7 +110,7 @@ describe(`Index`, () => {
 
     describe(`save products behavior`, () => {
       test(`when the user click in button to open modal should have three inputs with placeholders "Nome do Produto", "Preço do Produto" and "Quantidade do Produto"`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
           name: `Adicionar um Produto`,
@@ -133,7 +134,7 @@ describe(`Index`, () => {
       });
 
       test(`the user should can add products to list`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
           name: `Adicionar um Produto`,
@@ -194,8 +195,8 @@ describe(`Index`, () => {
         ).toHaveTextContent(``);
       });
 
-      test(`when the user save products, the products should render in the list`, async () => {
-        render(<Index />);
+      test(`when the user save products, the products should renderWithRedux in the list`, async () => {
+        renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
           name: `Adicionar um Produto`,
@@ -258,7 +259,7 @@ describe(`Index`, () => {
       });
 
       test(`when the user save products, the footer with total of products and total price should be in the document`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
           name: `Adicionar um Produto`,
@@ -331,7 +332,7 @@ describe(`Index`, () => {
       });
 
       test(`when the user save products, and after remove a product, the values in footer should be updated`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
           name: `Adicionar um Produto`,
@@ -416,7 +417,7 @@ describe(`Index`, () => {
       });
 
       test(`when the user save products, should have an button on footer with testId equal to "clearlist-button-open-modal-button"`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
           name: `Adicionar um Produto`,
@@ -485,7 +486,7 @@ describe(`Index`, () => {
       });
 
       test(`when the user save products, and clicks on button to clear list, should have an element with testId equal to "pop-up-to-clear-list"`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
           name: `Adicionar um Produto`,
@@ -560,7 +561,7 @@ describe(`Index`, () => {
       });
 
       test(`when the user save products, and clicks on button to clear list, should have to buttons on pop-up with testIds equals "yes-button" and "no-button"`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
           name: `Adicionar um Produto`,
@@ -639,7 +640,7 @@ describe(`Index`, () => {
       });
 
       test(`when the user save products, and clicks on button to clear list, and clicks on "yes-button" the list should be cleaned`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
           name: `Adicionar um Produto`,
@@ -724,7 +725,7 @@ describe(`Index`, () => {
       });
 
       test(`when the user save products, and clicks on button to clear list, and clicks on "no-button" the list should keeping the products`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
           name: `Adicionar um Produto`,
@@ -811,7 +812,7 @@ describe(`Index`, () => {
 
     describe(`search for a product behavior`, () => {
       test(`with products in list, if the user search by product should return only the serched product`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
 
@@ -876,7 +877,7 @@ describe(`Index`, () => {
       });
 
       test(`after searching for a product, the user can use back-button to back to the original list of products`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
 
@@ -951,7 +952,7 @@ describe(`Index`, () => {
       });
 
       test(`after searching for a product, and the user use back-button to back to the original list of products the search input should be empty`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
 
@@ -1028,7 +1029,7 @@ describe(`Index`, () => {
       });
 
       test(`after searching for a product, the user can delete a specific product in the filtered list`, async () => {
-        render(<Index />);
+        renderWithRedux(<Index />);
 
         expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
 
