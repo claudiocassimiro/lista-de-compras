@@ -1,5 +1,6 @@
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Product } from '../../pages';
+import NotFound from '../NotFound';
 import styles from './styles.module.css';
 
 export interface RenderProductsProps {
@@ -43,5 +44,7 @@ export default function RenderFilteredProducts({
         </div>
       ))}
     </div>
-  ) : null; // TODO: notFound
+  ) : (
+    <NotFound />
+  );
 }
