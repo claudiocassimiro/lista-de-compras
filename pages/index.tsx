@@ -92,8 +92,12 @@ const Home: NextPage = () => {
       return setFilteredProducts([]);
     }
 
-    const serchedProduct = products?.filter((product) =>
-      product?.productName?.toLowerCase()?.includes(term?.toLowerCase()),
+    const serchedProduct = products?.filter(
+      (product) =>
+        product?.productName
+          ?.toLowerCase()?.[0]
+          ?.includes(term?.[0]?.toLowerCase()) &&
+        product?.productName?.toLowerCase()?.includes(term?.toLowerCase()),
     );
 
     if (serchedProduct.length === 0) {
