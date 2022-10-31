@@ -14,30 +14,28 @@ export default function RenderProducts({
 }: RenderProductsProps) {
   return products?.length > 0 ? (
     <div className={styles.renderProductsContainer}>
-      <div className={styles.renderProductsContainer}>
-        {products?.map((product, index) => (
-          <div
-            data-testid="products"
-            className={styles.renderProductsProductWrapper}
-            key={`${product?.productName}-${index + 1}`}
-          >
-            <div className={styles.renderProductsProductContent}>
-              <p className={styles.renderProductsProductName}>
-                {product?.productName}
-              </p>
-              <hr className={styles.divider} />
-              <p className={styles.renderProductsProductPrice}>
-                {product?.productPrice}
-              </p>
-            </div>
-            <AiOutlineCloseCircle
-              data-testid="delete-product"
-              size="25"
-              onClick={() => handleRemoveProduct(product?.productName)}
-            />
+      {products?.map((product, index) => (
+        <div
+          data-testid="products"
+          className={styles.renderProductsProductWrapper}
+          key={`${product?.productName}-${index + 1}`}
+        >
+          <div className={styles.renderProductsProductContent}>
+            <p className={styles.renderProductsProductName}>
+              {product?.productName}
+            </p>
+            <hr className={styles.divider} />
+            <p className={styles.renderProductsProductPrice}>
+              {product?.productPrice}
+            </p>
           </div>
-        ))}
-      </div>
+          <AiOutlineCloseCircle
+            data-testid="delete-product"
+            size="25"
+            onClick={() => handleRemoveProduct(product?.productName)}
+          />
+        </div>
+      ))}
     </div>
   ) : (
     <EmptyState />
