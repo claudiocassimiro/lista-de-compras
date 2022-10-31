@@ -17,6 +17,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       },
       serviceWorkerPath: `./js/push/onesignal/OneSignalSDKWorker.js`,
     });
+
+    const cancelTimeout = setTimeout(() => {
+      OneSignal.showSlidedownPrompt();
+    }, 15000);
+
+    return () => {
+      clearTimeout(cancelTimeout);
+    };
   }, []);
 
   return (
