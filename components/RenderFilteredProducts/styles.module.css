@@ -34,6 +34,12 @@
 
 .divider {
   width: 2rem;
-  border: 0.1rem solid #9c9c9c; 
+  border: 0.1rem solid #9c9c9c;
   transform: rotate(90deg);
+}
+
+@media only screen and (min-aspect-ratio: 1/1) and (max-height: 420px) {
+  .renderProductsContainer {
+    height: 10rem;
+  }
 }
