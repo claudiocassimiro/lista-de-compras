@@ -17,8 +17,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       },
       serviceWorkerPath: `./js/push/onesignal/OneSignalSDKWorker.js`,
     });
-
-    OneSignal.showSlidedownPrompt();
   }, []);
 
   return (
