@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { useEffect, useMemo, useState } from 'react';
-import OneSignal from 'react-onesignal';
 import styles from '../styles/Home.module.css';
 import AddProductModal from '../components/AddProductModal';
 import BackToTheListProductsButton from '../components/BackToTheListProductsButton';
@@ -71,12 +70,6 @@ const Home: NextPage = () => {
 
     setProducts(savedProducts);
   }, []);
-
-  useEffect(() => {
-    if (quantityOfProducts > 0) {
-      OneSignal.showSlidedownPrompt();
-    }
-  }, [quantityOfProducts]);
 
   const totalPrice = useMemo(() => {
     const total = products.reduce(
