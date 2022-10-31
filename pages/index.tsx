@@ -76,8 +76,7 @@ const Home: NextPage = () => {
     if (quantityOfProducts > 0) {
       OneSignal.showSlidedownPrompt();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [quantityOfProducts]);
 
   const totalPrice = useMemo(() => {
     const total = products.reduce(
