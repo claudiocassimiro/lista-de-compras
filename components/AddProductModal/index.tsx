@@ -154,6 +154,8 @@ export default function AddProductModal({
                 onChange={setProductQuantity}
               />
             </div>
+          </div>
+          <div className={styles.addProductModalContainerButton}>
             <button
               type="button"
               className={styles.addProductModalButton}
