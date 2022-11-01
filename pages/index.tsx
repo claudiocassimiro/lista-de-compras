@@ -8,6 +8,7 @@ import RenderProducts from '../components/RenderProducts';
 import SearchByProduct from '../components/SearchByProduct';
 import RenderFilteredProducts from '../components/RenderFilteredProducts';
 import Footer from '../components/Footer';
+import { priceFormater } from '../utils/functions';
 
 export interface Product {
   productName: string;
@@ -77,10 +78,7 @@ const Home: NextPage = () => {
       0,
     );
 
-    const formatedTotal = total.toLocaleString(`pt-br`, {
-      style: `currency`,
-      currency: `BRL`,
-    });
+    const formatedTotal = priceFormater(total);
 
     return formatedTotal;
   }, [products]);
