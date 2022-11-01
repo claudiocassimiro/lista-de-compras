@@ -21,7 +21,9 @@ export default function ClearListButton({ setProducts }: ClearListButtonProps) {
         className={styles.clearListButtonOpenModalButton}
         {...modal}
       >
-        <span className={styles.clearListButtonTextButton}>Limpar lista</span>
+        <span className={styles.clearListButtonTextButton}>
+          Limpar Carrinho
+        </span>
       </DialogDisclosure>
       {modal.visible ? (
         <Dialog
@@ -32,7 +34,7 @@ export default function ClearListButton({ setProducts }: ClearListButtonProps) {
         >
           <div className={styles.clearListButtonPopUp}>
             <p className={styles.clearListButtonText}>
-              Você deseja limpar a lista?
+              Você deseja limpar o carrinho?
             </p>
 
             <div className={styles.clearListButtonContainerButtons}>
