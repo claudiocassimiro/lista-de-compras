@@ -40,7 +40,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
         <link rel="shortcut icon" href="/icon-192x192.png" />
-        <title>App Lista de Compras</title>
+        <title>Meu Carrinho</title>
       </Head>
       <Provider store={store}>
         <Component {...pageProps} />
