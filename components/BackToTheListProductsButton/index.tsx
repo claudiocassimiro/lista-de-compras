@@ -28,9 +28,7 @@ export default function BackToTheListProductsButton({
         onClick={handleClick}
       >
         <TbArrowBack size="20" />
-        <span className={styles.backToTheListProductsText}>
-          Voltar para lista
-        </span>
+        <span className={styles.backToTheListProductsText}>Voltar</span>
       </button>
     </div>
   );
