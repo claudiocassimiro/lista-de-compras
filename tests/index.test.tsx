@@ -889,9 +889,9 @@ describe(`Index`, () => {
 
         await waitFor(() => userEvent.type(searchInput, `feijão puro`));
 
-        expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+        expect(screen.getByText(`1 - feijão puro`)).toBeInTheDocument();
 
-        expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
+        expect(screen.queryByText(`2 - arroz`)).not.toBeInTheDocument();
       });
 
       test(`after searching for a product, the user can use back-button to back to the original list of products`, async () => {
@@ -954,9 +954,9 @@ describe(`Index`, () => {
 
         await waitFor(() => userEvent.type(searchInput, `feijão puro`));
 
-        expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+        expect(screen.getByText(`1 - feijão puro`)).toBeInTheDocument();
 
-        expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
+        expect(screen.queryByText(`2 - arroz`)).not.toBeInTheDocument();
 
         const backButton = screen.getByTestId(`back-button`);
 
@@ -964,9 +964,9 @@ describe(`Index`, () => {
 
         await waitFor(() => userEvent.click(backButton));
 
-        expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+        expect(screen.getByText(`1 - feijão puro`)).toBeInTheDocument();
 
-        expect(screen.getByText(`arroz`)).toBeInTheDocument();
+        expect(screen.getByText(`2 - arroz`)).toBeInTheDocument();
       });
 
       test(`after searching for a product, and the user use back-button to back to the original list of products the search input should be empty`, async () => {
@@ -1029,9 +1029,9 @@ describe(`Index`, () => {
 
         await waitFor(() => userEvent.type(searchInput, `feijão puro`));
 
-        expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+        expect(screen.getByText(`1 - feijão puro`)).toBeInTheDocument();
 
-        expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
+        expect(screen.queryByText(`2 - arroz`)).not.toBeInTheDocument();
 
         const backButton = screen.getByTestId(`back-button`);
 
@@ -1039,9 +1039,9 @@ describe(`Index`, () => {
 
         await waitFor(() => userEvent.click(backButton));
 
-        expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+        expect(screen.getByText(`1 - feijão puro`)).toBeInTheDocument();
 
-        expect(screen.getByText(`arroz`)).toBeInTheDocument();
+        expect(screen.getByText(`2 - arroz`)).toBeInTheDocument();
 
         expect(searchInput).toHaveTextContent(``);
       });
@@ -1106,17 +1106,17 @@ describe(`Index`, () => {
 
         await waitFor(() => userEvent.type(searchInput, `feijão puro`));
 
-        expect(screen.getByText(`feijão puro`)).toBeInTheDocument();
+        expect(screen.getByText(`1 - feijão puro`)).toBeInTheDocument();
 
-        expect(screen.queryByText(`arroz`)).not.toBeInTheDocument();
+        expect(screen.queryByText(`2 - arroz`)).not.toBeInTheDocument();
 
         await waitFor(() =>
           userEvent.click(screen.getByTestId(`delete-product`)),
         );
 
-        expect(screen.getByText(`arroz`)).toBeInTheDocument();
+        expect(screen.getByText(`2 - arroz`)).toBeInTheDocument();
 
-        expect(screen.queryByText(`feijão puro`)).not.toBeInTheDocument();
+        expect(screen.queryByText(`1 - feijão puro`)).not.toBeInTheDocument();
 
         expect(searchInput).toHaveTextContent(``);
       });
