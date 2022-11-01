@@ -1,5 +1,6 @@
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Product } from '../../pages';
+import { priceFormater } from '../../utils/functions';
 import EmptyState from '../EmptyState';
 import styles from './styles.module.css';
 
@@ -22,11 +23,11 @@ export default function RenderProducts({
         >
           <div className={styles.renderProductsProductContent}>
             <p className={styles.renderProductsProductName}>
-              {product?.productName}
+              {`${product?.productQuantity} - ${product?.productName}`}
             </p>
             <hr className={styles.divider} />
             <p className={styles.renderProductsProductPrice}>
-              {product?.productPrice}
+              {priceFormater(Number(product?.productPrice))}
             </p>
           </div>
           <AiOutlineCloseCircle
