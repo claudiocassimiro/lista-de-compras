@@ -34,7 +34,7 @@ export default function SearchByProduct({
         type="text"
         name="searchedProduct"
         value={searchedProduct}
-        placeholder="Pesquise um produto na lista"
+        placeholder="Pesquise um produto no carrinho"
         onChange={setSearchedProduct}
       />
     </div>
