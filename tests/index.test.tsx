@@ -815,7 +815,7 @@ describe(`Index`, () => {
         renderWithRedux(<Index />);
 
         const searchInput = screen.getByPlaceholderText(
-          `Pesquise um produto na lista`,
+          `Pesquise um produto no carrinho`,
         );
 
         expect(searchInput).toBeInTheDocument();
@@ -882,7 +882,7 @@ describe(`Index`, () => {
         );
 
         const searchInput = screen.getByPlaceholderText(
-          `Pesquise um produto na lista`,
+          `Pesquise um produto no carrinho`,
         );
 
         expect(searchInput).toBeInTheDocument();
@@ -947,7 +947,7 @@ describe(`Index`, () => {
         );
 
         const searchInput = screen.getByPlaceholderText(
-          `Pesquise um produto na lista`,
+          `Pesquise um produto no carrinho`,
         );
 
         expect(searchInput).toBeInTheDocument();
@@ -1022,7 +1022,7 @@ describe(`Index`, () => {
         );
 
         const searchInput = screen.getByPlaceholderText(
-          `Pesquise um produto na lista`,
+          `Pesquise um produto no carrinho`,
         );
 
         expect(searchInput).toBeInTheDocument();
@@ -1099,7 +1099,7 @@ describe(`Index`, () => {
         );
 
         const searchInput = screen.getByPlaceholderText(
-          `Pesquise um produto na lista`,
+          `Pesquise um produto no carrinho`,
         );
 
         expect(searchInput).toBeInTheDocument();
