@@ -20,9 +20,10 @@
 
 .renderProductsProductContent {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  width: 60%;
+  width: 100%;
+  margin-right: 4rem;
 }
 
 .renderProductsProductName,
