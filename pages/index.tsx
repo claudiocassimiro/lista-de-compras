@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import { useEffect, useMemo, useState } from 'react';
+import cn from 'classnames';
 import styles from '../styles/Home.module.css';
 import AddProductModal from '../components/AddProductModal';
 import BackToTheListProductsButton from '../components/BackToTheListProductsButton';
@@ -9,6 +10,8 @@ import SearchByProduct from '../components/SearchByProduct';
 import RenderFilteredProducts from '../components/RenderFilteredProducts';
 import Footer from '../components/Footer';
 import { priceFormater } from '../utils/functions';
+import AboutUs from '../components/AboutUs';
+import AboutApp from '../components/AboutApp';
 
 export interface Product {
   productName: string;
@@ -117,7 +120,12 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div
+      className={cn(styles.container, {
+        [styles.emptyContainer]:
+          products.length === 0 && filteredProducts.length === 0,
+      })}
+    >
       <Header />
       <div className={styles.homePageContent}>
         <SearchByProduct
@@ -126,7 +134,12 @@ const Home: NextPage = () => {
         />
         <AddProductModal handleProducts={handleProducts} />
         <hr className={styles.divider} />
-        <div className={styles.homePageWrapper}>
+        <div
+          className={cn(styles.homePageWrapper, {
+            [styles.homePageEmptyWrapper]:
+              products.length === 0 && filteredProducts.length === 0,
+          })}
+        >
           {renderBackToListButton ? (
             <BackToTheListProductsButton
               setFilteredProduct={setFilteredProducts}
@@ -147,6 +160,15 @@ const Home: NextPage = () => {
             />
           )}
         </div>
+        {products.length === 0 && filteredProducts.length === 0 ? (
+          <div
+            data-testid="content-info-about-app"
+            className={styles.homePageContentInfoAboutApp}
+          >
+            <AboutApp />
+            <AboutUs />
+          </div>
+        ) : null}
       </div>
       {products.length > 0 &&
       filteredProducts.length === 0 &&
