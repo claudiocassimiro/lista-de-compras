@@ -38,3 +38,21 @@
   letter-spacing: -0.01rem;
   margin: 0;
 }
+
+@media (min-width: 768px) {
+  .homePageAboutUsTitle {
+    font-size: 2.4rem;
+  }
+
+  .homePageAboutUsParagraph {
+    font-size: 1.8rem;
+  }
+
+  .homePageAboutUsSubTitle {
+    font-size: 2rem;
+  }
+
+  .homePageAboutUsSocialMediaParagraph {
+    font-size: 1.6rem;
+  }
+}
