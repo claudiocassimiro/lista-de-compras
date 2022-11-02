@@ -36,13 +36,13 @@ describe(`Index`, () => {
     });
 
     describe(`empty state behavior`, () => {
-      test(`if there is no product in the list, the empty state must be renderWithReduxed`, async () => {
+      test(`if there is no product in the list, the empty state must be render`, async () => {
         renderWithRedux(<Index />);
 
         expect(screen.getByTestId(`empty-state`)).toBeInTheDocument();
       });
 
-      test(`if there is a product in the list, empty state should not be renderWithReduxed`, async () => {
+      test(`if there is a product in the list, empty state should not be render`, async () => {
         renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
@@ -89,6 +89,65 @@ describe(`Index`, () => {
         );
 
         expect(screen.queryByTestId(`empty-state`)).not.toBeInTheDocument();
+      });
+
+      test(`if there is no product in the list, the element with testid "content-info-about-app" must be render`, async () => {
+        renderWithRedux(<Index />);
+
+        expect(
+          screen.getByTestId(`content-info-about-app`),
+        ).toBeInTheDocument();
+      });
+
+      test(`if there is a product in the list, the element with testid "content-info-about-app" should not be render`, async () => {
+        renderWithRedux(<Index />);
+
+        const openModalButton = screen.getByRole(`button`, {
+          name: `Adicionar um Produto`,
+        });
+
+        expect(openModalButton).toBeInTheDocument();
+
+        await waitFor(() => userEvent.click(openModalButton));
+
+        expect(
+          screen.getByPlaceholderText(`Nome do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Preço do Produto`),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.getByPlaceholderText(`Quantidade do Produto`),
+        ).toBeInTheDocument();
+
+        const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
+        const priceProductInput =
+          screen.getByPlaceholderText(`Preço do Produto`);
+        const quantityProductInput = screen.getByPlaceholderText(
+          `Quantidade do Produto`,
+        );
+
+        await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
+
+        await waitFor(() => userEvent.type(priceProductInput, `10`));
+
+        await waitFor(() => userEvent.type(quantityProductInput, `1`));
+
+        const addProductButton = screen.getByRole(`button`, {
+          name: `Adicionar`,
+        });
+
+        await waitFor(() => userEvent.click(addProductButton));
+
+        await waitFor(() =>
+          userEvent.click(screen.getByTestId(`close-button`)),
+        );
+
+        expect(
+          screen.queryByTestId(`content-info-about-app`),
+        ).not.toBeInTheDocument();
       });
     });
 
