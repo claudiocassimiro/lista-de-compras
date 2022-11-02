@@ -161,7 +161,10 @@ const Home: NextPage = () => {
           )}
         </div>
         {products.length === 0 && filteredProducts.length === 0 ? (
-          <div className={styles.homePageContentInfoAboutApp}>
+          <div
+            data-testid="content-info-about-app"
+            className={styles.homePageContentInfoAboutApp}
+          >
             <AboutApp />
             <AboutUs />
           </div>
