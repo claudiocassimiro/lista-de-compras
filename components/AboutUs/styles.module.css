@@ -1,0 +1,40 @@
+.homePageContentAboutUs {
+  text-align: center;
+}
+
+.homePageAboutUsTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 2.4rem;
+  letter-spacing: -0.03rem;
+}
+
+.homePageAboutUsParagraph {
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  letter-spacing: -0.01rem;
+}
+
+.homePageAboutUsSubTitle {
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 2.4rem;
+  letter-spacing: -0.03rem;
+  margin: 0;
+}
+
+.homePageSocialMediaContainer {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.homePageAboutUsSocialMediaParagraph {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: rgb(50, 91, 255);
+  text-decoration: underline;
+  line-height: 2.4rem;
+  letter-spacing: -0.01rem;
+  margin: 0;
+}
