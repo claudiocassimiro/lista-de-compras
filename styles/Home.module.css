@@ -5,6 +5,11 @@
   width: 100vw;
   height: 100vh;
   position: relative;
+  overflow-x: scroll;
+}
+
+.container::-webkit-scrollbar {
+  width: 0;
 }
 
 .homePageContent {
@@ -24,5 +29,5 @@
   justify-content: space-between;
   position: relative;
   width: 100%;
-  height: 60%;
+  height: 100vh;
 }
