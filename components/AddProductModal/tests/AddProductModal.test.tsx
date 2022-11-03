@@ -59,19 +59,17 @@ describe(`AddProductModal`, () => {
       ).toBeInTheDocument();
     });
 
-    test(`when the modal is open should have a input with the placeholder text "Preço do Produto"`, async () => {
+    test(`when the modal is open should have a input with the placeholder text "Preço"`, async () => {
       render(<AddProductModal {...mockProps} />);
 
       expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
 
       userEvent.click(screen.getByText(`Adicionar um Produto`));
 
-      expect(
-        await screen.findByPlaceholderText(`Preço do Produto`),
-      ).toBeInTheDocument();
+      expect(await screen.findByPlaceholderText(`Preço`)).toBeInTheDocument();
     });
 
-    test(`when the modal is open should have a input with the placeholder text "Quantidade do Produto"`, async () => {
+    test(`when the modal is open should have a input with the placeholder text "Quantidade"`, async () => {
       render(<AddProductModal {...mockProps} />);
 
       expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
@@ -79,12 +77,12 @@ describe(`AddProductModal`, () => {
       userEvent.click(screen.getByText(`Adicionar um Produto`));
 
       expect(
-        await screen.findByPlaceholderText(`Quantidade do Produto`),
+        await screen.findByPlaceholderText(`Quantidade`),
       ).toBeInTheDocument();
     });
 
     describe(`with the modal open, if the user clicks on input checkbox`, () => {
-      test(`the input with placeholder "Preço do Produto" should be "Preço do Produto por KG"`, async () => {
+      test(`the input with placeholder "Preço" should be "Preço por KG"`, async () => {
         render(<AddProductModal {...mockProps} />);
 
         expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
@@ -101,16 +99,16 @@ describe(`AddProductModal`, () => {
 
         await waitFor(() =>
           expect(
-            screen.queryByPlaceholderText(`Preço do Produto`),
+            screen.queryByPlaceholderText(`Preço`),
           ).not.toBeInTheDocument(),
         );
 
         expect(
-          await screen.findByPlaceholderText(`Preço do Produto por KG`),
+          await screen.findByPlaceholderText(`Preço por KG`),
         ).toBeInTheDocument();
       });
 
-      test(`the input with placeholder "Quantidade do Produto" should be "Quantidade do Produto por KG"`, async () => {
+      test(`the input with placeholder "Quantidade" should be "Quantidade por KG"`, async () => {
         render(<AddProductModal {...mockProps} />);
 
         expect(screen.getByText(`Adicionar um Produto`)).toBeInTheDocument();
@@ -127,12 +125,12 @@ describe(`AddProductModal`, () => {
 
         await waitFor(() =>
           expect(
-            screen.queryByPlaceholderText(`Quantidade do Produto`),
+            screen.queryByPlaceholderText(`Quantidade`),
           ).not.toBeInTheDocument(),
         );
 
         expect(
-          await screen.findByPlaceholderText(`Quantidade do Produto por KG`),
+          await screen.findByPlaceholderText(`Quantidade por KG`),
         ).toBeInTheDocument();
       });
     });

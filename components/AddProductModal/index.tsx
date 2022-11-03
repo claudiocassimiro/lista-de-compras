@@ -2,6 +2,7 @@ import { useDialogState, Dialog, DialogDisclosure } from 'reakit/Dialog';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { useState, useEffect, useMemo } from 'react';
+import cn from 'classnames';
 import Input from '../Input';
 import styles from './styles.module.css';
 import { Product } from '../../pages';
@@ -57,19 +58,13 @@ export default function AddProductModal({
   };
 
   const modifiedPlaceholdeToPrice = useMemo(
-    () =>
-      thisProductIsSellByWeight
-        ? `Preço do Produto por KG`
-        : `Preço do Produto`,
+    () => (thisProductIsSellByWeight ? `Preço por KG` : `Preço`),
 
     [thisProductIsSellByWeight],
   );
 
   const modifiedPlaceholdeToQuantity = useMemo(
-    () =>
-      thisProductIsSellByWeight
-        ? `Quantidade do Produto por KG`
-        : `Quantidade do Produto`,
+    () => (thisProductIsSellByWeight ? `Quantidade por KG` : `Quantidade`),
     [thisProductIsSellByWeight],
   );
 
@@ -137,22 +132,34 @@ export default function AddProductModal({
                 />
                 Esse produto é vendido por KG?
               </label>
-              <Input
-                className={styles.addProductModalInput}
-                name="productPrice"
-                value={productPrice}
-                type="number"
-                placeholder={modifiedPlaceholdeToPrice}
-                onChange={setProductPrice}
-              />
-              <Input
-                className={styles.addProductModalInput}
-                name="productQuantity"
-                value={productQuantity}
-                type="number"
-                placeholder={modifiedPlaceholdeToQuantity}
-                onChange={setProductQuantity}
-              />
+              <div
+                className={
+                  styles.addProductModalContainerInputsPriceAndQuantity
+                }
+              >
+                <Input
+                  className={cn(
+                    styles.addProductModalInput,
+                    styles.addProductModalNumberInputs,
+                  )}
+                  name="productPrice"
+                  value={productPrice}
+                  type="number"
+                  placeholder={modifiedPlaceholdeToPrice}
+                  onChange={setProductPrice}
+                />
+                <Input
+                  className={cn(
+                    styles.addProductModalInput,
+                    styles.addProductModalNumberInputs,
+                  )}
+                  name="productQuantity"
+                  value={productQuantity}
+                  type="number"
+                  placeholder={modifiedPlaceholdeToQuantity}
+                  onChange={setProductQuantity}
+                />
+              </div>
             </div>
           </div>
           <div className={styles.addProductModalContainerButton}>

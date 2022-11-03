@@ -10,6 +10,7 @@
   height: 6.4rem;
   position: absolute;
   bottom: 0;
+  margin-bottom: 5rem;
 }
 
 .footerContainerInfos {
@@ -31,5 +32,11 @@
   .footerTotalOfProducts,
   .footerTotalPrice {
     font-size: 1.6rem;
+  }
+}
+
+@media all and (display-mode: standalone) {
+  .footer {
+    margin-bottom: 0;
   }
 }
