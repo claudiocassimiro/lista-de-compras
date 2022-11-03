@@ -57,20 +57,13 @@ describe(`Index`, () => {
           screen.getByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Preço`)).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Quantidade do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Quantidade`)).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
@@ -114,20 +107,13 @@ describe(`Index`, () => {
           screen.getByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Preço`)).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Quantidade do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Quantidade`)).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
@@ -168,7 +154,7 @@ describe(`Index`, () => {
     });
 
     describe(`save products behavior`, () => {
-      test(`when the user click in button to open modal should have three inputs with placeholders "Nome do Produto", "Preço do Produto" and "Quantidade do Produto"`, async () => {
+      test(`when the user click in button to open modal should have three inputs with placeholders "Nome do Produto", "Preço" and "Quantidade"`, async () => {
         renderWithRedux(<Index />);
 
         const openModalButton = screen.getByRole(`button`, {
@@ -183,13 +169,9 @@ describe(`Index`, () => {
           screen.getByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Preço`)).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Quantidade do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Quantidade`)).toBeInTheDocument();
       });
 
       test(`the user should can add products to list`, async () => {
@@ -207,13 +189,9 @@ describe(`Index`, () => {
           screen.getByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Preço`)).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Quantidade do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Quantidade`)).toBeInTheDocument();
 
         await waitFor(() =>
           userEvent.type(
@@ -223,14 +201,11 @@ describe(`Index`, () => {
         );
 
         await waitFor(() =>
-          userEvent.type(screen.getByPlaceholderText(`Preço do Produto`), `10`),
+          userEvent.type(screen.getByPlaceholderText(`Preço`), `10`),
         );
 
         await waitFor(() =>
-          userEvent.type(
-            screen.getByPlaceholderText(`Quantidade do Produto`),
-            `1`,
-          ),
+          userEvent.type(screen.getByPlaceholderText(`Quantidade`), `1`),
         );
 
         const addProductButton = screen.getByRole(`button`, {
@@ -245,13 +220,9 @@ describe(`Index`, () => {
           screen.getByPlaceholderText(`Nome do Produto`),
         ).toHaveTextContent(``);
 
-        expect(
-          screen.getByPlaceholderText(`Preço do Produto`),
-        ).toHaveTextContent(``);
+        expect(screen.getByPlaceholderText(`Preço`)).toHaveTextContent(``);
 
-        expect(
-          screen.getByPlaceholderText(`Quantidade do Produto`),
-        ).toHaveTextContent(``);
+        expect(screen.getByPlaceholderText(`Quantidade`)).toHaveTextContent(``);
       });
 
       test(`when the user save products, the products should renderWithRedux in the list`, async () => {
@@ -269,20 +240,13 @@ describe(`Index`, () => {
           screen.getByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Preço`)).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Quantidade do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Quantidade`)).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
@@ -332,20 +296,13 @@ describe(`Index`, () => {
           screen.getByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Preço`)).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Quantidade do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Quantidade`)).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
@@ -405,20 +362,13 @@ describe(`Index`, () => {
           screen.getByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Preço`)).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Quantidade do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Quantidade`)).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
@@ -490,20 +440,13 @@ describe(`Index`, () => {
           screen.getByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Preço`)).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Quantidade do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Quantidade`)).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
@@ -559,20 +502,13 @@ describe(`Index`, () => {
           screen.getByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Preço`)).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Quantidade do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Quantidade`)).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
@@ -634,20 +570,13 @@ describe(`Index`, () => {
           screen.getByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Preço`)).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Quantidade do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Quantidade`)).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
@@ -713,20 +642,13 @@ describe(`Index`, () => {
           screen.getByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Preço`)).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Quantidade do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Quantidade`)).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
@@ -798,20 +720,13 @@ describe(`Index`, () => {
           screen.getByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Preço`)).toBeInTheDocument();
 
-        expect(
-          screen.getByPlaceholderText(`Quantidade do Produto`),
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(`Quantidade`)).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
@@ -901,20 +816,15 @@ describe(`Index`, () => {
           await screen.findByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          await screen.findByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(await screen.findByPlaceholderText(`Preço`)).toBeInTheDocument();
 
         expect(
-          await screen.findByPlaceholderText(`Quantidade do Produto`),
+          await screen.findByPlaceholderText(`Quantidade`),
         ).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
@@ -966,20 +876,15 @@ describe(`Index`, () => {
           await screen.findByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          await screen.findByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(await screen.findByPlaceholderText(`Preço`)).toBeInTheDocument();
 
         expect(
-          await screen.findByPlaceholderText(`Quantidade do Produto`),
+          await screen.findByPlaceholderText(`Quantidade`),
         ).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
@@ -1041,20 +946,15 @@ describe(`Index`, () => {
           await screen.findByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          await screen.findByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(await screen.findByPlaceholderText(`Preço`)).toBeInTheDocument();
 
         expect(
-          await screen.findByPlaceholderText(`Quantidade do Produto`),
+          await screen.findByPlaceholderText(`Quantidade`),
         ).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
@@ -1118,20 +1018,15 @@ describe(`Index`, () => {
           await screen.findByPlaceholderText(`Nome do Produto`),
         ).toBeInTheDocument();
 
-        expect(
-          await screen.findByPlaceholderText(`Preço do Produto`),
-        ).toBeInTheDocument();
+        expect(await screen.findByPlaceholderText(`Preço`)).toBeInTheDocument();
 
         expect(
-          await screen.findByPlaceholderText(`Quantidade do Produto`),
+          await screen.findByPlaceholderText(`Quantidade`),
         ).toBeInTheDocument();
 
         const nameProductInput = screen.getByPlaceholderText(`Nome do Produto`);
-        const priceProductInput =
-          screen.getByPlaceholderText(`Preço do Produto`);
-        const quantityProductInput = screen.getByPlaceholderText(
-          `Quantidade do Produto`,
-        );
+        const priceProductInput = screen.getByPlaceholderText(`Preço`);
+        const quantityProductInput = screen.getByPlaceholderText(`Quantidade`);
 
         await waitFor(() => userEvent.type(nameProductInput, `feijão puro`));
 
