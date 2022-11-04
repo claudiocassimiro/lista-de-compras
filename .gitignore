@@ -46,3 +46,8 @@ next-env.d.ts
 **/public/workbox-*.js.map
 **/public/worker-*.js.map
 **/public/fallback-*.js
+
+# next sitemap build 
+public/robots.txt
+public/sitemap.xml
+public/sitemap-*.xml
