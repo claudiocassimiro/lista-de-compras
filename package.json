@@ -12,7 +12,8 @@
     "format": "prettier --ignore-path .gitignore \"**/*.+(ts|js|tsx)\" --write",
     "type-check": "tsc",
     "prepare": "husky install",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
