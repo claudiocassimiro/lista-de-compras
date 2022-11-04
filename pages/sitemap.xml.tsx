@@ -7,7 +7,7 @@ export default function Sitemap() {
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const BASE_URL = `https://meucarrinho.vercel.app/`;
-  const BASE_DIR = process.env.NODE_ENV === `production` ? `./` : `pages`;
+  const BASE_DIR = process.env.NODE_ENV === `production` ? `./pages` : `pages`;
 
   const staticPaths = fs
     .readdirSync(BASE_DIR)
