@@ -1,40 +1,42 @@
 import { GetServerSideProps } from 'next';
-
-const glob = require(`glob`);
+import * as fs from 'fs';
 
 export default function Sitemap() {
   return null;
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  const pagesDir = `pages/**/*.tsx`;
-  let pagesPaths = await glob.sync(pagesDir);
+  const BASE_URL = `https://meucarrinho.vercel.app/`;
+  const BASE_DIR = process.env.NODE_ENV === `production` ? `./` : `pages`;
 
-  pagesPaths = pagesPaths
-    .filter((path: string) => !path.includes(`[`))
-    .filter((path: string) => !path.includes(`/_`))
-    .filter((path: string) => !path.includes(`404`));
+  const staticPaths = fs
+    .readdirSync(BASE_DIR)
+    .filter(
+      (staticPage) =>
+        ![
+          `api`,
+          `_app.tsx`,
+          `_document.tsx`,
+          `404.tsx`,
+          `sitemap.xml.tsx`,
+        ].includes(staticPage),
+    )
+    .map((staticPagePath) => `${BASE_URL}/${staticPagePath}`);
 
-  const allPaths = [...pagesPaths];
+  const allPaths = [...staticPaths];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-  <urlset
-        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-              http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-  ${allPaths
-    .map(
-      (url) => `
-        <url>
-          <loc>${url}</loc>
-          <lastmod>${new Date().toISOString()}</lastmod>
-        </url>
-      `,
-    )
-    .join(``)}
-  
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    ${allPaths
+      .map(
+        (url) => `
+          <url>
+            <loc>${url}</loc>
+            <lastmod>${new Date().toISOString()}</lastmod>
+          </url>
+        `,
+      )
+      .join(``)}
   </urlset>`;
 
   res.setHeader(`Content-Type`, `text/xml`);
